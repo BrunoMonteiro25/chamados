@@ -12,4 +12,5 @@ body {
   background-color: #17181f;
   color: #fff;
   padding: 2rem;
+  overflow: hidden;
 }

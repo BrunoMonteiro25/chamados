@@ -4,7 +4,6 @@ import {
   AvatarCard,
   Container,
   NavLink,
-  Logout,
   Menu,
   DropdownButton,
   DropdownContent,
@@ -58,10 +57,10 @@ const Header = () => {
             <p>Configurações</p>
           </NavLink>
 
-          <Logout>
+          <NavLink to="/login" style={{ marginTop: '250px' }}>
             <Sair />
             <p>Sair</p>
-          </Logout>
+          </NavLink>
         </Menu>
       </Container>
     </>
