@@ -14,3 +14,12 @@ body {
   padding: 2rem;
   overflow: hidden;
 }
+
+.config {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
