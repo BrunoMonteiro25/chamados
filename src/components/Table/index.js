@@ -12,7 +12,10 @@ import { ReactComponent as Atendimentos } from '../../assets/icones/atendimentos
 import { ReactComponent as Novo } from '../../assets/icones/novo.svg'
 import { ReactComponent as Visualizar } from '../../assets/icones/visualizar.svg'
 import { ReactComponent as Editar } from '../../assets/icones/editar.svg'
+
 import { HeaderTable } from './styles'
+
+import { useNavigate } from 'react-router-dom'
 
 const columns = [
   { id: 'name', label: 'Cliente', minWidth: 170, align: 'center' },
@@ -176,6 +179,12 @@ export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate('/novo-chamado')
+  }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -199,7 +208,7 @@ export default function StickyHeadTable() {
             <Atendimentos />
             Atendimentos
           </p>
-          <button>
+          <button onClick={handleClick}>
             <Novo />
             Novo Chamado
           </button>

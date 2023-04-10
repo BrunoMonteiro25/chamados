@@ -17,8 +17,16 @@ import { ReactComponent as Clientes } from '../../assets/icones/clientes.svg'
 import { ReactComponent as Config } from '../../assets/icones/config.svg'
 import { ReactComponent as Sair } from '../../assets/icones/sair.svg'
 
+import { useNavigate } from 'react-router-dom'
+
 const Header = () => {
   const [open, setOpen] = useState(false)
+
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate('/config')
+  }
 
   const toggleDropdown = () => {
     setOpen(!open)
@@ -28,7 +36,7 @@ const Header = () => {
     <>
       <Container>
         <AvatarCard>
-          <img src={Avatar} alt="foto-perfil" />
+          <img src={Avatar} alt="foto-perfil" onClick={handleClick} />
           <div className="user">
             <h2>John Doe</h2>
             <p>teste@teste.com</p>
@@ -36,7 +44,7 @@ const Header = () => {
           <DropdownButton onClick={toggleDropdown}>
             <Arrow />
           </DropdownButton>
-          <DropdownContent open={open}>
+          <DropdownContent open={open} onClick={handleClick}>
             <p>minha conta</p>
           </DropdownContent>
         </AvatarCard>

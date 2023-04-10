@@ -19,6 +19,7 @@ export const AvatarCard = styled.div`
     object-fit: cover;
     margin-left: 15px;
     border: 3px solid #fff;
+    cursor: pointer;
   }
 
   .user {
@@ -79,6 +80,7 @@ export const DropdownContent = styled.div`
   font-size: 14px;
   border-radius: 6px;
   border: 2px solid #cccccc;
+  cursor: pointer;
 `
 
 export const Menu = styled.nav`
