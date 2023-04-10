@@ -57,7 +57,10 @@ const Header = () => {
             <p>Configurações</p>
           </NavLink>
 
-          <NavLink to="/login" style={{ marginTop: '250px' }}>
+          <NavLink
+            to="/login"
+            style={{ marginLeft: '3px', marginTop: '200px' }}
+          >
             <Sair />
             <p>Sair</p>
           </NavLink>

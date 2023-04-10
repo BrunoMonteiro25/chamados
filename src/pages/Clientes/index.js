@@ -1,7 +1,14 @@
 import React from 'react'
+import Header from '../../components/Header'
+import { Container } from './styles'
 
 const Clientes = () => {
-  return <div>Clientes</div>
+  return (
+    <Container>
+      <Header />
+      <p>clientes</p>
+    </Container>
+  )
 }
 
 export default Clientes

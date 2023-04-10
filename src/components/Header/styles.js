@@ -42,7 +42,7 @@ export const AvatarCard = styled.div`
     margin-left: 65px;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 875px) {
     width: 80px;
     height: 80px;
     justify-content: center;
@@ -93,7 +93,7 @@ export const Menu = styled.nav`
   letter-spacing: 1px;
   padding: 10px 20px 20px 20px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 875px) {
     width: 80px;
     display: flex;
     flex-direction: column;
@@ -105,34 +105,40 @@ export const NavLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  /* padding: 25px 0px 0px 25px; */
   gap: 5px;
-  margin-top: 15px;
-  color: #fff;
+  color: #ccc;
+  padding: 10px;
+  margin-bottom: 5px;
+
+  &:first-child {
+    margin-top: 15px;
+  }
 
   &:hover {
     color: #ddd;
   }
-  /* &.active {
-    color: red;
-    font-weight: bold;
-  } */
 
-  @media screen and (max-width: 700px) {
-    p {
-      display: none;
+  svg {
+    path {
+      fill: #ccc;
     }
   }
-`
 
-export const Logout = styled.li`
-  display: flex;
-  align-items: center;
-  /* padding: 25px 0px 0px 25px; */
-  gap: 5px;
-  margin-top: 250px;
+  &.active {
+    background-color: #17181f;
+    /* font-weight: 500; */
+    z-index: 99;
+    border-radius: 6px;
+    color: #fff;
 
-  @media screen and (max-width: 700px) {
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
+  @media screen and (max-width: 875px) {
     p {
       display: none;
     }

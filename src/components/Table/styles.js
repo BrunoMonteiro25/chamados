@@ -31,4 +31,13 @@ export const HeaderTable = styled.div`
     gap: 5px;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 645px) {
+    flex-direction: column;
+    gap: 1rem;
+
+    /* button {
+      width: max-content;
+    } */
+  }
 `
