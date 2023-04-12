@@ -1,37 +1,39 @@
 import React from 'react'
 import Header from '../../components/Header'
-import { Container, New, LoginForm, Label, Input } from './styles'
+import { Container, Content, Form } from './styles'
 
 import { ReactComponent as NovoCliente } from '../../assets/icones/novo_cliente.svg'
 import { ReactComponent as Novo } from '../../assets/icones/novo.svg'
+import Input from '../../components/Input'
+import Label from '../../components/Label'
 
 const Clientes = () => {
   return (
     <Container>
       <Header />
 
-      <New>
+      <Content>
         <p className="title">
           <NovoCliente />
           Novo Cliente
         </p>
 
-        <LoginForm>
+        <Form>
           <Label>Nome Fantasia</Label>
-          <Input type="text" placeholder="Escola Vida" />
+          <Input type="text" placeholder="Nome da empresa" />
 
           <Label style={{ marginTop: '20px' }}>CNPJ</Label>
           <Input type="text" placeholder="Seu CNPJ" />
 
           <Label style={{ marginTop: '20px' }}>Endereço</Label>
-          <Input type="text" placeholder="Enderço da empresa" />
+          <Input type="text" placeholder="Endereço da empresa" />
 
           <button>
             <Novo />
             <p>Registrar</p>
           </button>
-        </LoginForm>
-      </New>
+        </Form>
+      </Content>
     </Container>
   )
 }

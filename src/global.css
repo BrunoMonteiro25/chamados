@@ -15,11 +15,30 @@ body {
   overflow: hidden;
 }
 
-.config {
+.config-view {
+  background-color: #686ca4;
   width: 34px;
   height: 34px;
   border-radius: 8px;
   border: none;
   margin-left: 10px;
   cursor: pointer;
+}
+
+.config-view:hover {
+  background-color: #6e72ad;
+}
+
+.config-edit {
+  background-color: #dc9f47;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.config-edit:hover {
+  background-color: #ebaa4c;
 }

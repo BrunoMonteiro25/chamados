@@ -4,12 +4,14 @@ import {
   TopDiv,
   LoginForm,
   BottomDiv,
-  Label,
-  Input,
   NavLink,
   NewAccount,
 } from './styles'
+
 import { useNavigate } from 'react-router-dom'
+
+import Input from '../../components/Input'
+import Label from '../../components/Label'
 
 const Login = () => {
   const navigate = useNavigate()

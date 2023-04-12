@@ -68,40 +68,6 @@ export const LoginForm = styled.form`
   }
 `
 
-export const Label = styled.label`
-  font-size: 20px;
-  margin-bottom: 5px;
-  letter-spacing: 1px;
-  color: #fff;
-`
-
-export const Input = styled.input`
-  height: 50px;
-  padding-left: 20px;
-  font-size: 16px;
-  border: none;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  letter-spacing: 1px;
-  background-color: #44465f;
-  color: #fff;
-  outline: none !important;
-
-  ::placeholder {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    color: #ccc;
-  }
-
-  :focus {
-    border: 2px solid #6f74c6;
-  }
-
-  ::selection {
-    background-color: #6f74c6;
-  }
-`
-
 export const NavLink = styled(Link)`
   height: 48px;
   width: 500px;

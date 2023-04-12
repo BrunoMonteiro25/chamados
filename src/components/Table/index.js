@@ -41,22 +41,10 @@ const columns = [
     align: 'center',
     format: (value, row) => (
       <div>
-        <button
-          onClick={() => handleView(row)}
-          className="config"
-          style={{
-            backgroundColor: '#686CA4',
-          }}
-        >
+        <button onClick={() => handleView(row)} className="config-view">
           <Visualizar />
         </button>
-        <button
-          onClick={() => handleEdit(row)}
-          className="config"
-          style={{
-            backgroundColor: '#DC9F47',
-          }}
-        >
+        <button onClick={() => handleEdit(row)} className="config-edit">
           <Editar />
         </button>
       </div>

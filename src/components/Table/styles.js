@@ -30,6 +30,10 @@ export const HeaderTable = styled.div`
     justify-content: center;
     gap: 5px;
     cursor: pointer;
+
+    &:hover {
+      background-color: #0e870b;
+    }
   }
 
   @media screen and (max-width: 645px) {
