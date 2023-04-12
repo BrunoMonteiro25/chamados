@@ -19,6 +19,10 @@ const InputStyled = styled.input`
     color: #ccc;
   }
 
+  /* :hover {
+    border: 2px solid #6f74c6;
+  } */
+
   :focus {
     border: 2px solid #6f74c6;
   }
