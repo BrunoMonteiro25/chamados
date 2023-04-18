@@ -4,6 +4,7 @@ import Config from './pages/Config'
 import Login from './pages/Login'
 import Cadastrar from './pages/CadastrarUsuario'
 import NovoChamado from './pages/NovoChamado'
+import EditarChamado from './pages/EditarChamado'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/nova-conta" element={<Cadastrar />} />
           <Route path="/novo-chamado" element={<NovoChamado />} />
+          <Route path="/editar-chamado" element={<EditarChamado />} />
         </Routes>
       </Router>
     </>

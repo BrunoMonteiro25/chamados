@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from '../../components/Header'
 import { Container, Content, Form, TextArea } from './styles'
 
-import { ReactComponent as Novo } from '../../assets/icones/novo-chamado.svg'
+import { ReactComponent as Editar } from '../../assets/icones/editar.svg'
 import Label from '../../components/Label'
 // import Input from '../../components/Input'
 import Dropdown from '../../components/Select'
@@ -31,8 +31,8 @@ const NovoChamado = () => {
 
       <Content>
         <p className="title">
-          <Novo />
-          Novo Chamado
+          <Editar />
+          Editar Chamado
         </p>
 
         <Form>
@@ -40,6 +40,7 @@ const NovoChamado = () => {
           <Dropdown />
 
           <Label>Assunto</Label>
+          {/* <Input type="text" placeholder="Digite o assunto" /> */}
           <Dropdown />
 
           <Label>Status</Label>
@@ -57,7 +58,7 @@ const NovoChamado = () => {
                   },
                 }}
               />
-              <label htmlFor="option1">Aberto</label>
+              <label htmlFor="option1">Em aberto</label>
             </div>
             <div className="radio">
               <Radio
@@ -72,11 +73,12 @@ const NovoChamado = () => {
                   },
                 }}
               />
-              <label htmlFor="option2">Progresso</label>
+              <label htmlFor="option2">Em atendimento</label>
             </div>
-            {/* <div className="radio">
+            <div className="radio">
               <Radio
-                {...controlProps('b')}
+                {...controlProps('c')}
+                id="option3"
                 color="default"
                 size="small"
                 sx={{
@@ -86,16 +88,16 @@ const NovoChamado = () => {
                   },
                 }}
               />
-              <label htmlFor="option3">Pausado</label>
-            </div> */}
+              <label htmlFor="option3">Fechado</label>
+            </div>
           </div>
 
           <Label>Descrição</Label>
           <TextArea placeholder="Descreva seu problema... (opcional)" />
 
           <button>
-            <Novo />
-            <p>Registrar</p>
+            <Editar />
+            <p>Atualizar</p>
           </button>
         </Form>
       </Content>

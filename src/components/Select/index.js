@@ -42,18 +42,6 @@ const Dropdown = () => {
         >
           Sketch
         </MenuItem>
-        <MenuItem
-          className={selected === 'Invision' ? 'active' : ''}
-          onClick={() => handleOptionClick('Invision')}
-        >
-          Invision
-        </MenuItem>
-        <MenuItem
-          className={selected === 'adobexd' ? 'active' : ''}
-          onClick={() => handleOptionClick('adobexd')}
-        >
-          adobexd
-        </MenuItem>
       </Menu>
     </DropdownWrapper>
   )

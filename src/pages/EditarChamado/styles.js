@@ -54,15 +54,15 @@ export const Form = styled.form`
 
   .radio label {
     letter-spacing: 1px;
-    font-size: 16px !important;
     cursor: pointer;
+    font-size: 16px !important;
   }
 
   button {
     padding: 15px;
     width: 187px;
     border-radius: 6px;
-    background-color: #0d830b;
+    background-color: #696fbe;
     border: none;
     color: #fff;
     font-family: 'Roboto', sans-serif;
@@ -77,12 +77,21 @@ export const Form = styled.form`
     margin-top: 10px;
 
     &:hover {
-      background-color: #0e870b;
+      background-color: #6f74c6;
     }
   }
 
   @media screen and (max-width: 967px) {
     width: 380px;
+
+    .container {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio {
+      margin-top: 0px !important;
+    }
   }
 
   @media screen and (max-width: 615px) {

@@ -25,6 +25,7 @@ export const Select = styled.div`
   padding: 1em;
   cursor: pointer;
   transition: background 0.3s;
+  margin-bottom: 25px;
 
   &:hover {
     background: #323741;

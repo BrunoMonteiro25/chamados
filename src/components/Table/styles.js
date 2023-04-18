@@ -12,6 +12,7 @@ export const HeaderTable = styled.div`
     align-items: center;
     gap: 5px;
     font-size: 20px;
+    letter-spacing: 1px;
   }
 
   button {
