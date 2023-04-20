@@ -32,8 +32,16 @@ const InputStyled = styled.input`
   }
 `
 
-const Input = ({ type, placeholder }) => {
-  return <InputStyled type={type} placeholder={placeholder} />
+const Input = ({ type, placeholder, name, value, onChange }) => {
+  return (
+    <InputStyled
+      type={type}
+      placeholder={placeholder}
+      name={name}
+      value={value}
+      onChange={onChange}
+    />
+  )
 }
 
 export default Input
