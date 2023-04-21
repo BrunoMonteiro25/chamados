@@ -15,7 +15,7 @@ import Label from '../../components/Label'
 
 import axios from 'axios'
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
@@ -35,7 +35,7 @@ const Login = () => {
       })
 
       localStorage.setItem('chave_secreta_do_token', response.data.token)
-
+      handleLogin()
       navigate('/')
     } catch (err) {
       console.log(err)
@@ -65,7 +65,7 @@ const Login = () => {
             onChange={(e) => setSenha(e.target.value)}
           />
 
-          <Button onSubmit={handleSubmit}>Acessar</Button>
+          <Button type="submit">Acessar</Button>
           <NewAccount onClick={handleClick}>
             <p>Criar uma conta</p>
           </NewAccount>
