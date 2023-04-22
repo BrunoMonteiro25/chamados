@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { NavLink as Link } from 'react-router-dom'
 
 export const Container = styled.div`
   display: flex;
@@ -69,7 +68,7 @@ export const LoginForm = styled.form`
   }
 `
 
-export const NavLink = styled(Link)`
+export const Button = styled.button`
   height: 48px;
   width: 500px;
   background-color: #696fbe;

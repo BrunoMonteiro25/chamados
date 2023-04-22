@@ -15,6 +15,8 @@ import Label from '../../components/Label'
 
 import axios from 'axios'
 
+import { toast } from 'react-toastify'
+
 const Login = ({ handleLogin }) => {
   const navigate = useNavigate()
 
@@ -56,6 +58,18 @@ const Login = ({ handleLogin }) => {
 
         localStorage.setItem('chave_secreta_do_token', response.data.token)
         handleLogin()
+
+        toast.success('Logado com Sucesso !', {
+          position: 'top-right',
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        })
+
         navigate('/')
       } catch (err) {
         console.log(err)
