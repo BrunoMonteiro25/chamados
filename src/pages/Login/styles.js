@@ -34,11 +34,12 @@ export const TopDiv = styled.div`
 
 export const BottomDiv = styled.div`
   width: 616px;
-  height: 413px;
+  height: max-content;
   background-color: #1e203c;
   display: flex;
   justify-content: center;
   border-radius: 0 0 23px 23px;
+  padding-bottom: 30px;
 
   @media screen and (max-width: 632px) {
     width: 400px;
