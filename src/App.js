@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Clientes from './pages/Clientes'
@@ -43,31 +38,22 @@ function App() {
     }
   }, [])
 
+  const createRoute = (path, component) => {
+    return isAuthenticated ? (
+      <Route path={path} element={component} />
+    ) : (
+      <Route path={path} element={<Login handleLogin={handleLogin} />} />
+    )
+  }
+
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/clientes"
-          element={isAuthenticated ? <Clientes /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/config"
-          element={isAuthenticated ? <Config /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/novo-chamado"
-          element={isAuthenticated ? <NovoChamado /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/editar-chamado"
-          element={
-            isAuthenticated ? <EditarChamado /> : <Navigate to="/login" />
-          }
-        />
+        {createRoute('/', <Home />)}
+        {createRoute('/clientes', <Clientes />)}
+        {createRoute('/config', <Config />)}
+        {createRoute('/novo-chamado', <NovoChamado />)}
+        {createRoute('/editar-chamado', <EditarChamado />)}
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/nova-conta" element={<Cadastrar />} />
       </Routes>

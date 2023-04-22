@@ -28,6 +28,10 @@ const Header = () => {
     navigate('/config')
   }
 
+  function handleLogout() {
+    localStorage.removeItem('chave_secreta_do_token')
+  }
+
   const toggleDropdown = () => {
     setOpen(!open)
   }
@@ -67,6 +71,7 @@ const Header = () => {
 
           <NavLink
             to="/login"
+            onClick={handleLogout}
             style={{ marginLeft: '3px', marginTop: '200px' }}
           >
             <Sair />
