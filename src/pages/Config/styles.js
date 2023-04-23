@@ -21,7 +21,7 @@ export const Content = styled.div`
     align-items: center;
     gap: 7px;
     font-size: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     letter-spacing: 1px;
   }
 `
@@ -31,6 +31,7 @@ export const Image = styled.div`
   width: 174px;
   height: 174px;
   border-radius: 50%;
+  margin-bottom: 20px;
 
   .img {
     width: 158px;

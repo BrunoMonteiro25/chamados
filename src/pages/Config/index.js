@@ -24,6 +24,12 @@ const Config = () => {
         <Image>
           <img src={Avatar} alt="foto-perfil" className="img" />
         </Image>
+        <input
+          type="file"
+          id="avatar"
+          name="avatar"
+          accept="image/png, image/jpeg"
+        />
 
         <Form>
           <Label>Nome</Label>

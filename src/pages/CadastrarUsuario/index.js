@@ -26,6 +26,8 @@ const Cadastrar = () => {
   const [emailEmpty, setEmailEmpty] = useState(false)
   const [senhaEmpty, setSenhaEmpty] = useState(false)
 
+  const [errorMsg, setErrorMsg] = useState('')
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -68,7 +70,11 @@ const Cadastrar = () => {
         console.log(response.data)
         navigate('/login')
       } catch (err) {
-        console.log(err)
+        if (err.response.status === 400) {
+          setErrorMsg('Email já cadastrado !')
+        } else {
+          console.log(err)
+        }
       }
     }
   }
@@ -102,6 +108,18 @@ const Cadastrar = () => {
       <TopDiv>CADASTRAR-SE</TopDiv>
       <BottomDiv>
         <LoginForm onSubmit={handleSubmit}>
+          {errorMsg !== undefined && (
+            <p
+              style={{
+                color: '#f1341b',
+                textAlign: 'center',
+                fontSize: '20px',
+                marginBottom: '20px',
+              }}
+            >
+              {errorMsg}
+            </p>
+          )}
           <Label>Nome</Label>
           <Input
             type="text"
