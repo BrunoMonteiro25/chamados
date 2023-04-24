@@ -12,18 +12,28 @@ export const AvatarCard = styled.div`
   align-items: center;
   position: relative;
 
-  img {
+  .letra {
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    object-fit: cover;
+    color: #fff;
     margin-left: 15px;
     border: 3px solid #fff;
+    background-color: #17181f;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .letra p {
+    font-size: 30px;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
   }
 
   .user {
-    margin-left: 33px;
+    margin-left: 20px;
   }
 
   .user h2 {
@@ -48,7 +58,7 @@ export const AvatarCard = styled.div`
     height: 80px;
     justify-content: center;
 
-    img {
+    .letra {
       margin-left: 0px;
     }
 
@@ -57,30 +67,6 @@ export const AvatarCard = styled.div`
       display: none;
     }
   }
-`
-
-export const DropdownButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-`
-
-export const DropdownContent = styled.div`
-  display: ${(props) => (props.open ? 'block' : 'none')};
-  position: absolute;
-  z-index: 1;
-  top: 60%;
-  right: -25px;
-  background-color: #17181f;
-  min-width: max-content;
-  padding: 12px 16px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 2px solid #cccccc;
-  cursor: pointer;
 `
 
 export const Menu = styled.nav`

@@ -1,17 +1,7 @@
 import React, { useState } from 'react'
 
-import {
-  AvatarCard,
-  Container,
-  NavLink,
-  Menu,
-  DropdownButton,
-  DropdownContent,
-} from './styles'
+import { AvatarCard, Container, NavLink, Menu } from './styles'
 
-import Avatar from '../../assets/avatar.jpg'
-
-import { ReactComponent as Arrow } from '../../assets/icones/arrow.svg'
 import { ReactComponent as Chamados } from '../../assets/icones/chamados.svg'
 import { ReactComponent as Clientes } from '../../assets/icones/clientes.svg'
 import { ReactComponent as Config } from '../../assets/icones/config.svg'
@@ -20,7 +10,8 @@ import { ReactComponent as Sair } from '../../assets/icones/sair.svg'
 import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
-  const [open, setOpen] = useState(false)
+  const [nome, setNome] = useState('')
+  const [email, setEmail] = useState('')
 
   const navigate = useNavigate()
 
@@ -32,25 +23,34 @@ const Header = () => {
     localStorage.removeItem('chave_secreta_do_token')
   }
 
-  const toggleDropdown = () => {
-    setOpen(!open)
+  async function loadUser() {
+    const token = localStorage.getItem('chave_secreta_do_token')
+
+    const response = await fetch('http://localhost:8000/usuario-logado', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const data = await response.json()
+
+    setNome(data.nome)
+    setEmail(data.email)
   }
+
+  loadUser()
 
   return (
     <>
       <Container>
         <AvatarCard>
-          <img src={Avatar} alt="foto-perfil" onClick={handleClick} />
-          <div className="user">
-            <h2>John Doe</h2>
-            <p>teste@teste.com</p>
+          <div className="letra" onClick={handleClick}>
+            <p>{nome[0]}</p>
           </div>
-          <DropdownButton onClick={toggleDropdown}>
-            <Arrow />
-          </DropdownButton>
-          <DropdownContent open={open} onClick={handleClick}>
-            <p>minha conta</p>
-          </DropdownContent>
+          <div className="user">
+            <h2>{nome}</h2>
+            <p>{email}</p>
+          </div>
         </AvatarCard>
 
         <Menu>
