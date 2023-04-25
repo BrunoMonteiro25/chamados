@@ -103,7 +103,15 @@ const Config = () => {
           <Input
             type="text"
             value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            onChange={(e) =>
+              setNome(
+                e.target.value
+                  .toLowerCase()
+                  .split(' ')
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(' '),
+              )
+            }
           />
 
           <Label style={{ marginTop: '20px' }}>Email</Label>

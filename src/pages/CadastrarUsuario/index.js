@@ -125,7 +125,15 @@ const Cadastrar = () => {
             type="text"
             placeholder="Digite seu nome"
             value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            onChange={(e) =>
+              setNome(
+                e.target.value
+                  .toLowerCase()
+                  .split(' ')
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(' '),
+              )
+            }
           />
           {nomeEmpty && <p style={{ color: '#f1341b' }}>Campo obrigatório *</p>}
 
