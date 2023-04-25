@@ -5,12 +5,11 @@ import { Container, Content, Form } from './styles'
 
 import { ReactComponent as ConfigIcon } from '../../assets/icones/config2.svg'
 import { ReactComponent as Salvar } from '../../assets/icones/salvar.svg'
-// import { ReactComponent as Upload } from '../../assets/icones/upload.svg'
-
-// import Avatar from '../../assets/avatar.jpg'
 
 import Input from '../../components/Input'
 import Label from '../../components/Label'
+
+import { toast } from 'react-toastify'
 
 const Config = () => {
   const [nome, setNome] = useState('')
@@ -41,6 +40,17 @@ const Config = () => {
 
   async function handleSave(event) {
     event.preventDefault()
+
+    // Validar campo de e-mail
+    const emailRegex = /\S+@\S+\.\S+/
+    if (!email) {
+      setEmailError('Campo obrigatório *')
+      return
+    } else if (!emailRegex.test(email)) {
+      setEmailError('Digite um email válido!')
+      return
+    }
+
     try {
       const token = localStorage.getItem('chave_secreta_do_token')
       const response = await axios.put(
@@ -57,6 +67,18 @@ const Config = () => {
       setNome(response.data.nome)
       setEmail(response.data.email)
       setCount(count + 1)
+      setEmailError('')
+
+      toast.success('Usuário atualizado !', {
+        position: 'bottom-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
     } catch (error) {
       if (error.response.status === 400) {
         setEmailError('Este email já está em uso.')
@@ -77,20 +99,6 @@ const Config = () => {
         </p>
 
         <Form>
-          {/* <Image>
-            <label htmlFor="avatar">
-              <img src={Avatar} alt="foto-perfil" className="img" />
-            </label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              accept="image/png, image/jpeg"
-              className="foto"
-            />
-            <Upload />
-          </Image> */}
-
           <Label>Nome</Label>
           <Input
             type="text"
@@ -104,6 +112,7 @@ const Config = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           {emailError !== undefined && (
             <p
               style={{
