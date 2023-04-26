@@ -3,7 +3,7 @@ import axios from 'axios'
 import Header from '../../components/Header'
 import { Container, Content, Form } from './styles'
 
-import { ReactComponent as ConfigIcon } from '../../assets/icones/config2.svg'
+import { ReactComponent as ConfigIcon } from '../../assets/icones/config-user.svg'
 import { ReactComponent as Salvar } from '../../assets/icones/salvar.svg'
 
 import Input from '../../components/Input'

@@ -24,6 +24,26 @@ export const Content = styled.div`
     margin-bottom: 50px;
     letter-spacing: 1px;
   }
+
+  .radio-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .radio {
+    display: flex;
+    align-items: center;
+    margin-left: -10px;
+  }
+
+  .radio label {
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-size: 16px !important;
+    margin-left: -4px;
+  }
 `
 
 export const Form = styled.form`
@@ -57,6 +77,23 @@ export const Form = styled.form`
 
     &:hover {
       background-color: #0e870b;
+    }
+  }
+
+  .edit {
+    background-color: #696fbe;
+
+    &:hover {
+      background-color: #6f74c6;
+    }
+  }
+
+  .delete {
+    background-color: #c22a16;
+    margin-top: -5px;
+
+    &:hover {
+      background-color: #cc2c17;
     }
   }
 

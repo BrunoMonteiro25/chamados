@@ -56,6 +56,7 @@ export const Form = styled.form`
     letter-spacing: 1px;
     cursor: pointer;
     font-size: 16px !important;
+    margin-left: -4px;
   }
 
   button {
