@@ -11,8 +11,6 @@ import Cadastrar from './pages/CadastrarUsuario'
 import NovoChamado from './pages/NovoChamado'
 import EditarChamado from './pages/EditarChamado'
 
-// import jwt_decode from 'jwt-decode'
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -23,7 +21,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('chave_secreta_do_token')
     if (token) {
-      // const decoded = jwt_decode(token)
       axios
         .post('http://localhost:8000/verificar-token', { token })
         .then((response) => {

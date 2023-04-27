@@ -57,6 +57,33 @@ export const Form = styled.form`
     font-size: 18px !important;
   }
 
+  .input-cnpj {
+    height: 50px;
+    padding-left: 20px;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    background-color: #44465f;
+    color: #fff;
+    outline: none !important;
+
+    ::placeholder {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    :focus {
+      border: 2px solid #6f74c6;
+    }
+
+    ::selection {
+      background-color: #6f74c6;
+    }
+  }
+
   button {
     padding: 15px;
     width: 187px;
@@ -94,6 +121,32 @@ export const Form = styled.form`
 
     &:hover {
       background-color: #cc2c17;
+    }
+  }
+
+  .button-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .loader {
+    display: flex;
+    align-items: center;
+  }
+
+  .loader-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    border-top-color: #fff;
+    animation: loader-spin 1s linear infinite;
+    margin-right: 8px;
+  }
+
+  @keyframes loader-spin {
+    to {
+      transform: rotate(360deg);
     }
   }
 

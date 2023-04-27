@@ -1,21 +1,34 @@
 import React, { useState } from 'react'
-import Header from '../../components/Header'
+import axios from 'axios'
+
 import { Container, Content, Form } from './styles'
+
 import { ReactComponent as NovoCliente } from '../../assets/icones/clientes-novo.svg'
 import { ReactComponent as EditarCliente } from '../../assets/icones/editar.svg'
 import { ReactComponent as ExcluirCliente } from '../../assets/icones/delete.svg'
-
 import { ReactComponent as Novo } from '../../assets/icones/novo.svg'
+
+import Header from '../../components/Header'
 import Input from '../../components/Input'
 import Label from '../../components/Label'
+import Dropdown from '../../components/Select'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
 
-import Dropdown from '../../components/Select'
+import InputMask from 'react-input-mask'
+import { toast } from 'react-toastify'
 
 const Clientes = () => {
+  const [nome, setNome] = useState('')
+  const [cnpj, setCnpj] = useState('')
+  const [endereco, setEndereco] = useState('')
+
   const [selectedValue, setSelectedValue] = useState('novo')
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [buttonText, setButtonText] = useState('Cadastrar')
+  const [buttonOpacity, setButtonOpacity] = useState(1)
 
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
@@ -29,23 +42,91 @@ const Clientes = () => {
     inputProps: { 'aria-label': item },
   })
 
+  async function handleFormSubmit(event) {
+    event.preventDefault()
+    setIsSubmitting(true)
+    setButtonText('Cadastrando...')
+    setButtonOpacity(0.5)
+
+    try {
+      await axios.post('http://localhost:8000/clientes', {
+        nome: nome,
+        cnpj: cnpj,
+        endereco: endereco,
+      })
+
+      setNome('')
+      setCnpj('')
+      setEndereco('')
+
+      toast.success('Cliente Cadastrado !', {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
+    } catch (err) {
+      console.error('Erro ao cadastrar cliente:', err)
+    } finally {
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setButtonText('Cadastrar')
+        setButtonOpacity(1)
+      }, 1500)
+    }
+  }
   const renderForm = () => {
     switch (selectedValue) {
       case 'novo':
         return (
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Label>Nome</Label>
-            <Input type="text" placeholder="Nome da empresa" />
+            <Input
+              type="text"
+              placeholder="Nome da empresa"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
 
             <Label style={{ marginTop: '20px' }}>CNPJ</Label>
-            <Input type="text" placeholder="00.000.000/0000-00" />
+            <InputMask
+              className="input-cnpj"
+              mask="99.999.999/9999-99"
+              value={cnpj}
+              placeholder="00.000.000/0000-00"
+              onChange={(e) => setCnpj(e.target.value)}
+            />
 
             <Label style={{ marginTop: '20px' }}>Endereço</Label>
-            <Input type="text" placeholder="Endereço da empresa" />
+            <Input
+              type="text"
+              value={endereco}
+              placeholder="Endereço da empresa"
+              onChange={(e) => setEndereco(e.target.value)}
+            />
 
-            <button>
-              <Novo style={{ width: '24px', height: '24px' }} />
-              <p>Cadastrar</p>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              style={{ opacity: buttonOpacity }}
+            >
+              {buttonText === 'Cadastrando...' ? (
+                <div className="loader">
+                  <div className="loader-circle"></div>
+                  <p>Cadastrando...</p>
+                </div>
+              ) : (
+                <>
+                  <div className="button-icon">
+                    <Novo style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <span>{buttonText}</span>
+                </>
+              )}
             </button>
           </Form>
         )
@@ -55,7 +136,7 @@ const Clientes = () => {
             <Label>Nome</Label>
             <Dropdown />
 
-            <Label style={{ marginTop: '20px' }}>CNPJ</Label>
+            <Label style={{ marginTop: '-5px' }}>CNPJ</Label>
             <Input type="text" placeholder="00.000.000/0000-00" />
 
             <Label style={{ marginTop: '20px' }}>Endereço</Label>
