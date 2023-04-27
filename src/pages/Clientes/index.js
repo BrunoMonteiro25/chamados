@@ -30,6 +30,9 @@ const Clientes = () => {
   const [buttonText, setButtonText] = useState('Cadastrar')
   const [buttonOpacity, setButtonOpacity] = useState(1)
 
+  const [nomeError, setNomeError] = useState('')
+  const [cnpjError, setCnpjError] = useState('')
+
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
   }
@@ -42,11 +45,73 @@ const Clientes = () => {
     inputProps: { 'aria-label': item },
   })
 
+  function validateCNPJ(cnpj) {
+    // eslint-disable-next-line no-useless-escape
+    const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
+    if (!cnpj) {
+      return false
+    } else if (!cnpjRegex.test(cnpj)) {
+      return false
+    } else {
+      // Realizar validação dos dígitos verificadores
+      const cnpjNumbers = cnpj.replace(/\D/g, '')
+      const weights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+      const sum = cnpjNumbers
+        .slice(0, 12)
+        .split('')
+        .reduce(
+          (acc, value, index) => acc + parseInt(value) * weights[index],
+          0,
+        )
+      const remainder = sum % 11
+      const firstDigit = remainder < 2 ? 0 : 11 - remainder
+
+      if (parseInt(cnpjNumbers.charAt(12)) !== firstDigit) {
+        return false
+      }
+
+      weights.unshift(6)
+      const newSum = cnpjNumbers
+        .slice(0, 13)
+        .split('')
+        .reduce(
+          (acc, value, index) => acc + parseInt(value) * weights[index],
+          0,
+        )
+      const newRemainder = newSum % 11
+      const secondDigit = newRemainder < 2 ? 0 : 11 - newRemainder
+
+      if (parseInt(cnpjNumbers.charAt(13)) !== secondDigit) {
+        return false
+      }
+
+      return true
+    }
+  }
+
   async function handleFormSubmit(event) {
     event.preventDefault()
     setIsSubmitting(true)
     setButtonText('Cadastrando...')
     setButtonOpacity(0.5)
+
+    // Verificando se o campo nome foi preenchido
+    if (nome === '') {
+      setNomeError('Campo obrigatório *')
+      setIsSubmitting(false)
+      setButtonText('Cadastrar')
+      setButtonOpacity(1)
+      return
+    }
+
+    // Adicionando validação do CNPJ
+    if (!validateCNPJ(cnpj)) {
+      setCnpjError('Digite um CNPJ válido!')
+      setIsSubmitting(false)
+      setButtonText('Cadastrar')
+      setButtonOpacity(1)
+      return
+    }
 
     try {
       await axios.post('http://localhost:8000/clientes', {
@@ -58,6 +123,8 @@ const Clientes = () => {
       setNome('')
       setCnpj('')
       setEndereco('')
+      setCnpjError(null)
+      setNomeError(null)
 
       toast.success('Cliente Cadastrado !', {
         position: 'top-right',
@@ -76,9 +143,10 @@ const Clientes = () => {
         setIsSubmitting(false)
         setButtonText('Cadastrar')
         setButtonOpacity(1)
-      }, 1500)
+      }, 1000)
     }
   }
+
   const renderForm = () => {
     switch (selectedValue) {
       case 'novo':
@@ -89,8 +157,14 @@ const Clientes = () => {
               type="text"
               placeholder="Nome da empresa"
               value={nome}
-              onChange={(e) => setNome(e.target.value)}
+              onChange={(e) =>
+                setNome(
+                  e.target.value.charAt(0).toUpperCase() +
+                    e.target.value.slice(1),
+                )
+              }
             />
+            {nomeError && <p style={{ color: '#f1341b' }}>{nomeError}</p>}
 
             <Label style={{ marginTop: '20px' }}>CNPJ</Label>
             <InputMask
@@ -100,6 +174,15 @@ const Clientes = () => {
               placeholder="00.000.000/0000-00"
               onChange={(e) => setCnpj(e.target.value)}
             />
+            {cnpjError && (
+              <p
+                style={{
+                  color: '#f1341b',
+                }}
+              >
+                {cnpjError}
+              </p>
+            )}
 
             <Label style={{ marginTop: '20px' }}>Endereço</Label>
             <Input
