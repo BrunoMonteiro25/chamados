@@ -3,7 +3,9 @@ import { DropdownWrapper, Select, Caret, Menu, MenuItem } from './styles'
 
 const DropdownClientes = ({ clientes }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState(clientes[0] || '')
+  const [selected, setSelected] = useState(
+    clientes[0] || 'Selecione um cliente',
+  )
 
   const handleSelectClick = () => {
     setIsOpen(!isOpen)

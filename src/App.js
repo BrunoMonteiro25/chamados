@@ -13,7 +13,6 @@ import EditarChamado from './pages/EditarChamado'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [clientes, setClientes] = useState([])
 
   function handleLogin() {
     setIsAuthenticated(true)
@@ -36,24 +35,6 @@ function App() {
     }
   }, [])
 
-  async function listarClientes() {
-    try {
-      const response = await axios.get('http://localhost:8000/clientes')
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  useEffect(() => {
-    async function carregaClientes() {
-      const data = await listarClientes()
-      setClientes(data)
-    }
-
-    carregaClientes()
-  }, [])
-
   const createRoute = (path, component) => {
     return isAuthenticated ? (
       <Route path={path} element={component} />
@@ -66,10 +47,10 @@ function App() {
     <Router>
       <Routes>
         {createRoute('/', <Home />)}
-        {createRoute('/clientes', <Clientes clientes={clientes} />)}
+        {createRoute('/clientes', <Clientes />)}
         {createRoute('/config', <Config />)}
-        {createRoute('/novo-chamado', <NovoChamado clientes={clientes} />)}
-        {createRoute('/editar-chamado', <EditarChamado clientes={clientes} />)}
+        {createRoute('/novo-chamado', <NovoChamado />)}
+        {createRoute('/editar-chamado', <EditarChamado />)}
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/nova-conta" element={<Cadastrar />} />
       </Routes>

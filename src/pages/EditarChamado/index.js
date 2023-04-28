@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import Header from '../../components/Header'
 import { Container, Content, Form, TextArea } from './styles'
 
@@ -11,8 +12,9 @@ import DropdownClientes from '../../components/Select/cliente'
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
 
-const EditarChamado = ({ clientes }) => {
+const EditarChamado = () => {
   const [selectedValue, setSelectedValue] = useState('a')
+  const [clientes, setClientes] = useState([])
 
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
@@ -25,6 +27,24 @@ const EditarChamado = ({ clientes }) => {
     name: 'color-radio-button-demo',
     inputProps: { 'aria-label': item },
   })
+
+  async function listarClientes() {
+    try {
+      const response = await axios.get('http://localhost:8000/clientes')
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    async function carregaClientes() {
+      const data = await listarClientes()
+      setClientes(data)
+    }
+
+    carregaClientes()
+  }, [])
 
   return (
     <Container>

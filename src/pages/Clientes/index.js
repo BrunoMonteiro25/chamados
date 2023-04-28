@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { Container, Content, Form } from './styles'
@@ -20,7 +20,7 @@ import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 import DropdownClientes from '../../components/Select/cliente'
 
-const Clientes = ({ clientes }) => {
+const Clientes = () => {
   const [nome, setNome] = useState('')
   const [cnpj, setCnpj] = useState('')
   const [endereco, setEndereco] = useState('')
@@ -34,7 +34,26 @@ const Clientes = ({ clientes }) => {
   const [nomeError, setNomeError] = useState('')
   const [cnpjError, setCnpjError] = useState('')
 
+  const [clientes, setClientes] = useState([])
   const [clienteSelecionado, setClienteSelecionado] = useState(null)
+
+  async function listarClientes() {
+    try {
+      const response = await axios.get('http://localhost:8000/clientes')
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    async function carregaClientes() {
+      const data = await listarClientes()
+      setClientes(data)
+    }
+
+    carregaClientes()
+  }, [])
 
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
@@ -139,6 +158,10 @@ const Clientes = ({ clientes }) => {
         progress: undefined,
         theme: 'dark',
       })
+
+      // Atualiza a lista de clientes
+      const data = await listarClientes()
+      setClientes(data)
     } catch (err) {
       console.error('Erro ao cadastrar cliente:', err)
     } finally {
