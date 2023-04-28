@@ -6,11 +6,12 @@ import { ReactComponent as Editar } from '../../assets/icones/editar.svg'
 import Label from '../../components/Label'
 // import Input from '../../components/Input'
 import Dropdown from '../../components/Select'
+import DropdownAssunto from '../../components/Select/assunto'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
 
-const NovoChamado = () => {
+const EditarChamado = ({ clientes }) => {
   const [selectedValue, setSelectedValue] = useState('a')
 
   const handleChangeRadio = (event) => {
@@ -37,11 +38,10 @@ const NovoChamado = () => {
 
         <Form>
           <Label>Cliente</Label>
-          <Dropdown />
+          <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
 
           <Label>Assunto</Label>
-          {/* <Input type="text" placeholder="Digite o assunto" /> */}
-          <Dropdown />
+          <DropdownAssunto />
 
           <Label>Status</Label>
           <div className="container">
@@ -105,4 +105,4 @@ const NovoChamado = () => {
   )
 }
 
-export default NovoChamado
+export default EditarChamado

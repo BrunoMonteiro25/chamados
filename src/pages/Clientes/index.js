@@ -19,7 +19,7 @@ import Radio from '@mui/material/Radio'
 import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 
-const Clientes = () => {
+const Clientes = ({ clientes }) => {
   const [nome, setNome] = useState('')
   const [cnpj, setCnpj] = useState('')
   const [endereco, setEndereco] = useState('')
@@ -217,7 +217,7 @@ const Clientes = () => {
         return (
           <Form>
             <Label>Nome</Label>
-            <Dropdown />
+            <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
 
             <Label style={{ marginTop: '-5px' }}>CNPJ</Label>
             <Input type="text" placeholder="00.000.000/0000-00" />
@@ -235,7 +235,7 @@ const Clientes = () => {
         return (
           <Form>
             <Label>Nome</Label>
-            <Dropdown />
+            <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
 
             <button className="delete">
               <ExcluirCliente style={{ width: '24px', height: '24px' }} />

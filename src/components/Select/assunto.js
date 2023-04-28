@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { DropdownWrapper, Select, Caret, Menu, MenuItem } from './styles'
 
-const Dropdown = ({ clientes }) => {
+const DropdownAssunto = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState(clientes[0] || '')
+  const [selected, setSelected] = useState('Suporte')
 
   const handleSelectClick = () => {
     setIsOpen(!isOpen)
@@ -24,18 +24,27 @@ const Dropdown = ({ clientes }) => {
         <Caret className={isOpen ? 'caret-rotate' : ''} />
       </Select>
       <Menu className={isOpen ? 'menu-open' : ''}>
-        {clientes.map((cliente) => (
-          <MenuItem
-            key={cliente}
-            className={selected === cliente ? 'active' : ''}
-            onClick={() => handleOptionClick(cliente)}
-          >
-            {cliente}
-          </MenuItem>
-        ))}
+        <MenuItem
+          className={selected === 'Suporte' ? 'active' : ''}
+          onClick={() => handleOptionClick('Suporte')}
+        >
+          Suporte
+        </MenuItem>
+        <MenuItem
+          className={selected === 'Bug' ? 'active' : ''}
+          onClick={() => handleOptionClick('Bug')}
+        >
+          Bug
+        </MenuItem>
+        <MenuItem
+          className={selected === 'Dúvidas' ? 'active' : ''}
+          onClick={() => handleOptionClick('Dúvidas')}
+        >
+          Dúvidas
+        </MenuItem>
       </Menu>
     </DropdownWrapper>
   )
 }
 
-export default Dropdown
+export default DropdownAssunto

@@ -6,11 +6,12 @@ import { ReactComponent as Novo } from '../../assets/icones/novo-chamado.svg'
 import Label from '../../components/Label'
 // import Input from '../../components/Input'
 import Dropdown from '../../components/Select'
+import DropdownAssunto from '../../components/Select/assunto'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
 
-const NovoChamado = () => {
+const NovoChamado = ({ clientes }) => {
   const [selectedValue, setSelectedValue] = useState('a')
 
   const handleChangeRadio = (event) => {
@@ -37,10 +38,10 @@ const NovoChamado = () => {
 
         <Form>
           <Label>Cliente</Label>
-          <Dropdown />
+          <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
 
           <Label>Assunto</Label>
-          <Dropdown />
+          <DropdownAssunto />
 
           <Label>Status</Label>
           <div className="container">
