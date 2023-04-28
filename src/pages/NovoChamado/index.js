@@ -4,9 +4,9 @@ import { Container, Content, Form, TextArea } from './styles'
 
 import { ReactComponent as Novo } from '../../assets/icones/novo-chamado.svg'
 import Label from '../../components/Label'
-// import Input from '../../components/Input'
-import Dropdown from '../../components/Select'
+
 import DropdownAssunto from '../../components/Select/assunto'
+import DropdownClientes from '../../components/Select/cliente'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
@@ -38,7 +38,9 @@ const NovoChamado = ({ clientes }) => {
 
         <Form>
           <Label>Cliente</Label>
-          <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
+          <DropdownClientes
+            clientes={clientes.map((cliente) => cliente.nome)}
+          />
 
           <Label>Assunto</Label>
           <DropdownAssunto />

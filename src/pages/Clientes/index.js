@@ -18,6 +18,7 @@ import Radio from '@mui/material/Radio'
 
 import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
+import DropdownClientes from '../../components/Select/cliente'
 
 const Clientes = ({ clientes }) => {
   const [nome, setNome] = useState('')
@@ -32,6 +33,8 @@ const Clientes = ({ clientes }) => {
 
   const [nomeError, setNomeError] = useState('')
   const [cnpjError, setCnpjError] = useState('')
+
+  const [clienteSelecionado, setClienteSelecionado] = useState(null)
 
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
@@ -147,6 +150,11 @@ const Clientes = ({ clientes }) => {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
+  const handleClienteSelect = (clienteSelecionado) => {
+    setClienteSelecionado(clienteSelecionado)
+  }
+
   const renderForm = () => {
     switch (selectedValue) {
       case 'novo':
@@ -217,13 +225,38 @@ const Clientes = ({ clientes }) => {
         return (
           <Form>
             <Label>Nome</Label>
-            <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
+            <Dropdown
+              clientes={clientes}
+              onClienteSelect={setClienteSelecionado}
+            />
 
             <Label style={{ marginTop: '-5px' }}>CNPJ</Label>
-            <Input type="text" placeholder="00.000.000/0000-00" />
+            <Input
+              type="text"
+              value={clienteSelecionado ? clienteSelecionado.cnpj || '' : ''}
+              onChange={(e) =>
+                setClienteSelecionado({
+                  ...clienteSelecionado,
+                  cnpj: e.target.value,
+                })
+              }
+              placeholder="00.000.000/0000-00"
+            />
 
             <Label style={{ marginTop: '20px' }}>Endereço</Label>
-            <Input type="text" placeholder="Endereço da empresa" />
+            <Input
+              type="text"
+              value={
+                clienteSelecionado ? clienteSelecionado.endereco || '' : ''
+              }
+              onChange={(event) =>
+                setClienteSelecionado({
+                  ...clienteSelecionado,
+                  endereco: event.target.value,
+                })
+              }
+              placeholder="Endereço da empresa"
+            />
 
             <button className="edit">
               <EditarCliente style={{ width: '24px', height: '24px' }} />
@@ -235,11 +268,13 @@ const Clientes = ({ clientes }) => {
         return (
           <Form>
             <Label>Nome</Label>
-            <Dropdown clientes={clientes.map((cliente) => cliente.nome)} />
+            <DropdownClientes
+              clientes={clientes.map((cliente) => cliente.nome)}
+            />
 
             <button className="delete">
               <ExcluirCliente style={{ width: '24px', height: '24px' }} />
-              <p>Apagar</p>
+              <p>Excluir</p>
             </button>
           </Form>
         )
