@@ -178,6 +178,39 @@ const Clientes = () => {
     setClienteSelecionado(clienteSelecionado)
   }
 
+  const atualizarCliente = async (event) => {
+    event.preventDefault()
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/clientes/${clienteSelecionado._id}`,
+        {
+          cnpj: clienteSelecionado.cnpj,
+          endereco: clienteSelecionado.endereco,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      toast.success(`O ${clienteSelecionado.nome} foi atualizado !`, {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
+
+      console.log('Cliente atualizado:', response.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const renderForm = () => {
     switch (selectedValue) {
       case 'novo':
@@ -281,7 +314,7 @@ const Clientes = () => {
               placeholder="Endereço da empresa"
             />
 
-            <button className="edit">
+            <button className="edit" onClick={atualizarCliente}>
               <EditarCliente style={{ width: '24px', height: '24px' }} />
               <p>Atualizar</p>
             </button>
