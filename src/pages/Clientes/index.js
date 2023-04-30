@@ -29,10 +29,12 @@ const Clientes = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [buttonText, setButtonText] = useState('Cadastrar')
+  const [buttonTextEdit, setButtonTextEdit] = useState('Atualizar')
   const [buttonOpacity, setButtonOpacity] = useState(1)
 
   const [nomeError, setNomeError] = useState('')
   const [cnpjError, setCnpjError] = useState('')
+  const [cnpjErrorEdit, setCnpjErrorEdit] = useState(null)
 
   const [clientes, setClientes] = useState([])
   const [clienteSelecionado, setClienteSelecionado] = useState(null)
@@ -111,7 +113,7 @@ const Clientes = () => {
     }
   }
 
-  async function handleFormSubmit(event) {
+  async function cadastrarCliente(event) {
     event.preventDefault()
     setIsSubmitting(true)
     setButtonText('Cadastrando...')
@@ -180,7 +182,20 @@ const Clientes = () => {
 
   const atualizarCliente = async (event) => {
     event.preventDefault()
+    setIsSubmitting(true)
+    setButtonTextEdit('Atualizando...')
+    setButtonOpacity(0.5)
+
+    if (!validateCNPJ(clienteSelecionado.cnpj)) {
+      setCnpjErrorEdit('Digite um CNPJ válido!')
+      setIsSubmitting(false)
+      setButtonTextEdit('Atualizar')
+      setButtonOpacity(1)
+      return
+    }
+
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.put(
         `http://localhost:8000/clientes/${clienteSelecionado._id}`,
         {
@@ -194,6 +209,8 @@ const Clientes = () => {
         },
       )
 
+      setCnpjErrorEdit(null)
+
       toast.success(`O ${clienteSelecionado.nome} foi atualizado !`, {
         position: 'top-right',
         autoClose: 1500,
@@ -205,9 +222,18 @@ const Clientes = () => {
         theme: 'dark',
       })
 
-      console.log('Cliente atualizado:', response.data)
+      // Atualiza a lista de clientes
+      const data = await listarClientes()
+      setClientes(data)
+      // console.log('Cliente atualizado:', response.data)
     } catch (error) {
       console.error(error)
+    } finally {
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setButtonTextEdit('Atualizar')
+        setButtonOpacity(1)
+      }, 1000)
     }
   }
 
@@ -215,7 +241,7 @@ const Clientes = () => {
     switch (selectedValue) {
       case 'novo':
         return (
-          <Form onSubmit={handleFormSubmit}>
+          <Form onSubmit={cadastrarCliente}>
             <Label>Nome</Label>
             <Input
               type="text"
@@ -287,17 +313,28 @@ const Clientes = () => {
             />
 
             <Label style={{ marginTop: '-5px' }}>CNPJ</Label>
-            <Input
-              type="text"
+            <InputMask
+              className="input-cnpj"
+              mask="99.999.999/9999-99"
               value={clienteSelecionado ? clienteSelecionado.cnpj || '' : ''}
+              placeholder="00.000.000/0000-00"
               onChange={(e) =>
                 setClienteSelecionado({
                   ...clienteSelecionado,
                   cnpj: e.target.value,
                 })
               }
-              placeholder="00.000.000/0000-00"
             />
+
+            {cnpjErrorEdit && (
+              <p
+                style={{
+                  color: '#f1341b',
+                }}
+              >
+                {cnpjErrorEdit}
+              </p>
+            )}
 
             <Label style={{ marginTop: '20px' }}>Endereço</Label>
             <Input
@@ -314,9 +351,25 @@ const Clientes = () => {
               placeholder="Endereço da empresa"
             />
 
-            <button className="edit" onClick={atualizarCliente}>
-              <EditarCliente style={{ width: '24px', height: '24px' }} />
-              <p>Atualizar</p>
+            <button
+              className="edit"
+              onClick={atualizarCliente}
+              disabled={isSubmitting}
+              style={{ opacity: buttonOpacity }}
+            >
+              {buttonTextEdit === 'Atualizando...' ? (
+                <div className="loader">
+                  <div className="loader-circle"></div>
+                  <p>Atualizando...</p>
+                </div>
+              ) : (
+                <>
+                  <div className="button-icon">
+                    <EditarCliente style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <span>{buttonTextEdit}</span>
+                </>
+              )}
             </button>
           </Form>
         )
