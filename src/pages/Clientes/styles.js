@@ -84,7 +84,9 @@ export const Form = styled.form`
     }
   }
 
-  button {
+  .buttonNovo,
+  .buttonEdit,
+  .buttonDelete {
     padding: 15px;
     width: 187px;
     border-radius: 6px;
@@ -107,7 +109,7 @@ export const Form = styled.form`
     }
   }
 
-  .edit {
+  .buttonEdit {
     background-color: #696fbe;
 
     &:hover {
@@ -115,7 +117,7 @@ export const Form = styled.form`
     }
   }
 
-  .delete {
+  .buttonDelete {
     background-color: #c22a16;
     margin-top: -5px;
 

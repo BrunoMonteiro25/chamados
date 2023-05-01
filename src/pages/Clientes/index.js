@@ -19,6 +19,7 @@ import Radio from '@mui/material/Radio'
 import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 import DropdownClientes from '../../components/Select/cliente'
+import Modal from '../../components/Modal'
 
 const Clientes = () => {
   const [nome, setNome] = useState('')
@@ -39,6 +40,8 @@ const Clientes = () => {
   const [clientes, setClientes] = useState([])
   const [clienteSelecionado, setClienteSelecionado] = useState(null)
   const [clienteSelecionadoDelete, setClienteSelecionadoDelete] = useState(null)
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   async function listarClientes() {
     try {
@@ -266,14 +269,19 @@ const Clientes = () => {
         },
       )
 
+      setIsModalVisible(false)
+
       // Atualiza a lista de clientes
       const data = await listarClientes()
       setClientes(data)
-
-      // console.log(response.data.message)
     } catch (err) {
       console.error(err)
     }
+  }
+
+  function openModal(event) {
+    event.preventDefault()
+    setIsModalVisible(true)
   }
 
   const renderForm = () => {
@@ -322,6 +330,7 @@ const Clientes = () => {
             />
 
             <button
+              className="buttonNovo"
               type="submit"
               disabled={isSubmitting}
               style={{ opacity: buttonOpacity }}
@@ -391,7 +400,7 @@ const Clientes = () => {
             />
 
             <button
-              className="edit"
+              className="buttonEdit"
               onClick={atualizarCliente}
               disabled={isSubmitting}
               style={{ opacity: buttonOpacity }}
@@ -421,10 +430,17 @@ const Clientes = () => {
               onClienteSelect={setClienteSelecionadoDelete}
             />
 
-            <button className="delete" onClick={excluirCliente}>
+            <button className="buttonDelete" onClick={openModal}>
               <ExcluirCliente style={{ width: '24px', height: '24px' }} />
               <p>Excluir</p>
             </button>
+
+            {isModalVisible ? (
+              <Modal
+                onClose={() => setIsModalVisible(false)}
+                excluirCliente={excluirCliente}
+              />
+            ) : null}
           </Form>
         )
       default:
