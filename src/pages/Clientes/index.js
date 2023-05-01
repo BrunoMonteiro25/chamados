@@ -38,6 +38,7 @@ const Clientes = () => {
 
   const [clientes, setClientes] = useState([])
   const [clienteSelecionado, setClienteSelecionado] = useState(null)
+  const [clienteSelecionadoDelete, setClienteSelecionadoDelete] = useState(null)
 
   async function listarClientes() {
     try {
@@ -180,6 +181,11 @@ const Clientes = () => {
     setClienteSelecionado(clienteSelecionado)
   }
 
+  // eslint-disable-next-line no-unused-vars
+  const handleClienteSelectDelete = (clienteSelecionadoDelete) => {
+    setClienteSelecionadoDelete(clienteSelecionadoDelete)
+  }
+
   const atualizarCliente = async (event) => {
     event.preventDefault()
     setIsSubmitting(true)
@@ -234,6 +240,39 @@ const Clientes = () => {
         setButtonTextEdit('Atualizar')
         setButtonOpacity(1)
       }, 1000)
+    }
+  }
+
+  const excluirCliente = async (event) => {
+    event.preventDefault()
+
+    try {
+      // eslint-disable-next-line no-unused-vars
+      await axios.delete(
+        `http://localhost:8000/clientes/${clienteSelecionadoDelete._id}`,
+      )
+
+      toast.success(
+        `O cliente: ${clienteSelecionadoDelete.nome} foi excluído !`,
+        {
+          position: 'top-right',
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        },
+      )
+
+      // Atualiza a lista de clientes
+      const data = await listarClientes()
+      setClientes(data)
+
+      // console.log(response.data.message)
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -378,10 +417,11 @@ const Clientes = () => {
           <Form>
             <Label>Nome</Label>
             <DropdownClientes
-              clientes={clientes.map((cliente) => cliente.nome)}
+              clientes={clientes}
+              onClienteSelect={setClienteSelecionadoDelete}
             />
 
-            <button className="delete">
+            <button className="delete" onClick={excluirCliente}>
               <ExcluirCliente style={{ width: '24px', height: '24px' }} />
               <p>Excluir</p>
             </button>
