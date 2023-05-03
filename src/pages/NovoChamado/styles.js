@@ -82,6 +82,32 @@ export const Form = styled.form`
     }
   }
 
+  .button-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .loader {
+    display: flex;
+    align-items: center;
+  }
+
+  .loader-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    border-top-color: #fff;
+    animation: loader-spin 1s linear infinite;
+    margin-right: 8px;
+  }
+
+  @keyframes loader-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   @media screen and (max-width: 967px) {
     width: 380px;
   }

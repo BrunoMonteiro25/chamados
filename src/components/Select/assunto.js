@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DropdownWrapper, Select, Caret, Menu, MenuItem } from './styles'
 
-const DropdownAssunto = () => {
+const DropdownAssunto = ({ onAssuntoSelect, resetAssunto }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState('Suporte')
+
+  useEffect(() => {
+    onAssuntoSelect(selected)
+  }, [selected, onAssuntoSelect])
+
+  useEffect(() => {
+    if (resetAssunto) {
+      setSelected('Suporte')
+    }
+  }, [resetAssunto])
 
   const handleSelectClick = () => {
     setIsOpen(!isOpen)

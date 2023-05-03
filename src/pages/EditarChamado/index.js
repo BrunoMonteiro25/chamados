@@ -59,7 +59,8 @@ const EditarChamado = () => {
         <Form>
           <Label>Cliente</Label>
           <DropdownClientes
-            clientes={clientes.map((cliente) => cliente.nome)}
+            clientes={clientes}
+            onClienteSelect={() => console.log('editar')}
           />
 
           <Label>Assunto</Label>
