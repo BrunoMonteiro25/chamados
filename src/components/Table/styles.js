@@ -15,7 +15,7 @@ export const HeaderTable = styled.div`
     letter-spacing: 1px;
   }
 
-  button {
+  .novo-chamado {
     margin-right: 30px;
     padding: 15px 30px;
     border-radius: 6px;
@@ -40,9 +40,54 @@ export const HeaderTable = styled.div`
   @media screen and (max-width: 645px) {
     flex-direction: column;
     gap: 1rem;
+  }
+`
 
-    /* button {
-      width: max-content;
-    } */
+export const Acoes = styled.div`
+  .config-view {
+    background-color: #686ca4;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+
+    :hover {
+      background-color: #6e72ad;
+    }
+  }
+
+  .config-edit {
+    background-color: #dc9f47;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+
+    :hover {
+      background-color: #ebaa4c;
+    }
+  }
+
+  .config-delete {
+    background-color: #d04735;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+
+    :hover {
+      background-color: #d34c3b;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 `

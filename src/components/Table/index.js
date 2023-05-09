@@ -14,8 +14,9 @@ import { ReactComponent as Atendimentos } from '../../assets/icones/atendimentos
 import { ReactComponent as Novo } from '../../assets/icones/novo.svg'
 import { ReactComponent as Visualizar } from '../../assets/icones/visualizar.svg'
 import { ReactComponent as Editar } from '../../assets/icones/editar.svg'
+import { ReactComponent as Excluir } from '../../assets/icones/delete.svg'
 
-import { HeaderTable } from './styles'
+import { Acoes, HeaderTable } from './styles'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -45,14 +46,14 @@ export default function StickyHeadTable() {
       label: 'Status',
       minWidth: 170,
       align: 'center',
-      format: (value) => value.toLocaleString('en-US'),
+      format: (value) => value.toLocaleString('pt-BR'),
     },
     {
       id: 'data',
       label: 'Data',
       minWidth: 170,
       align: 'center',
-      format: (value) => value.toLocaleString('en-US'),
+      format: (value) => value.toLocaleString('pt-BR'),
     },
     {
       id: 'acoes',
@@ -60,14 +61,17 @@ export default function StickyHeadTable() {
       minWidth: 170,
       align: 'center',
       format: (value, row) => (
-        <div>
+        <Acoes>
           <button onClick={() => handleView(row)} className="config-view">
             <Visualizar />
           </button>
           <button onClick={() => handleEdit(row)} className="config-edit">
             <Editar />
           </button>
-        </div>
+          <button onClick={() => handleDelete(row)} className="config-delete">
+            <Excluir />
+          </button>
+        </Acoes>
       ),
     },
   ]
@@ -76,6 +80,7 @@ export default function StickyHeadTable() {
     navigate('/editar-chamado')
   }
   function handleView(row) {}
+  function handleDelete(row) {}
 
   const rows = chamados.map((chamado) => ({
     nome: chamado.cliente.nome,
@@ -112,7 +117,7 @@ export default function StickyHeadTable() {
             <Atendimentos />
             Atendimentos
           </p>
-          <button onClick={handleClick}>
+          <button className="novo-chamado" onClick={handleClick}>
             <Novo />
             Novo Chamado
           </button>
