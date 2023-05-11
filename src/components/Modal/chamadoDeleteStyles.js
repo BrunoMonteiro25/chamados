@@ -7,7 +7,7 @@ export const ModalDiv = styled.div`
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.04);
   display: flex;
   justify-content: center;
   position: fixed;
@@ -17,7 +17,7 @@ export const Container = styled.div`
   margin-top: 250px;
   background-color: #eee;
   color: #17181f;
-  width: 500px;
+  width: 550px;
   height: max-content;
   border-radius: 6px;
   position: relative;
@@ -50,8 +50,14 @@ export const Content = styled.div`
   margin: 20px 21px 5px 20px;
   flex-direction: column;
 
-  p {
+  .titulo {
     font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: #17181f;
+    margin-bottom: 10px;
   }
 
   .containerButton {
@@ -76,10 +82,6 @@ export const Content = styled.div`
     gap: 5px;
     cursor: pointer;
     margin-top: 40px;
-
-    p {
-      font-weight: 400;
-    }
   }
 
   .cancelar {

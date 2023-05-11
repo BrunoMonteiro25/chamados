@@ -7,8 +7,6 @@ const ModalChamados = ({ id = 'modal', onClose = () => {}, chamado }) => {
     if (e.target.id === id) onClose()
   }
 
-  console.log(chamado)
-
   return (
     <ModalDiv id={id} onClick={handleOutsideClick}>
       <Container>

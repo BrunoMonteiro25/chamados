@@ -21,6 +21,9 @@ import { Acoes, HeaderTable } from './styles'
 import { useNavigate } from 'react-router-dom'
 
 import ModalChamados from '../Modal/chamado'
+import ModalDelete from '../Modal/chamadoDelete'
+
+import { toast } from 'react-toastify'
 
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0)
@@ -28,6 +31,7 @@ export default function StickyHeadTable() {
   const [chamados, setChamados] = useState([])
 
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisibleDelete, setIsModalVisibleDelete] = useState(false)
 
   const [selectedChamado, setSelectedChamado] = useState(null)
 
@@ -47,6 +51,39 @@ export default function StickyHeadTable() {
   function openModal(chamado) {
     setSelectedChamado(chamado)
     setIsModalVisible(true)
+  }
+
+  function openModalDelete(chamado) {
+    setSelectedChamado(chamado)
+    setIsModalVisibleDelete(true)
+  }
+
+  async function deletarChamado(id) {
+    try {
+      await axios.delete(`http://localhost:8000/chamados/${id}`)
+
+      toast.success(`O chamado foi excluído !`, {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
+
+      // Atualize a lista de chamados após a exclusão
+      const updatedChamados = chamados.filter((chamado) => chamado._id !== id)
+      setChamados(updatedChamados)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function handleDelete() {
+    deletarChamado(selectedChamado.id)
+    setIsModalVisibleDelete(false)
   }
 
   const columns = [
@@ -90,9 +127,23 @@ export default function StickyHeadTable() {
           <button onClick={() => handleEdit(row)} className="config-edit">
             <Editar />
           </button>
-          <button onClick={() => handleDelete(row)} className="config-delete">
+
+          <button
+            onClick={() => openModalDelete(row)}
+            className="config-delete"
+          >
             <Excluir />
           </button>
+
+          {isModalVisibleDelete ? (
+            <ModalDelete
+              onClose={() => {
+                setSelectedChamado(null)
+                setIsModalVisibleDelete(false)
+              }}
+              handleDelete={handleDelete}
+            />
+          ) : null}
         </Acoes>
       ),
     },
@@ -102,9 +153,8 @@ export default function StickyHeadTable() {
     navigate('/editar-chamado')
   }
 
-  function handleDelete(row) {}
-
   const rows = chamados.map((chamado) => ({
+    id: chamado._id,
     nome: chamado.cliente.nome,
     assunto: chamado.assunto,
     status: chamado.status,
