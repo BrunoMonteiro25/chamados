@@ -2,10 +2,12 @@ import React from 'react'
 import { ModalDiv, Container, Content } from './chamadoStyles'
 import { ReactComponent as Fechar } from '../../assets/icones/fechar2.svg'
 
-const ModalChamados = ({ id = 'modal', onClose = () => {} }) => {
+const ModalChamados = ({ id = 'modal', onClose = () => {}, chamado }) => {
   const handleOutsideClick = (e) => {
     if (e.target.id === id) onClose()
   }
+
+  console.log(chamado)
 
   return (
     <ModalDiv id={id} onClick={handleOutsideClick}>
@@ -20,27 +22,33 @@ const ModalChamados = ({ id = 'modal', onClose = () => {} }) => {
 
           <div className="detalhes">
             <p style={{ marginBottom: '15px' }}>
-              <span>Data: </span>10/05/2023
+              <span>Data: </span>
+              {chamado.data}
             </p>
 
             <p>
-              <span>Cliente: </span>Cliente 1
+              <span>Cliente: </span>
+              {chamado.nome}
             </p>
 
             <p>
-              <span>Assunto: </span>Suporte
+              <span>Assunto: </span>
+              {chamado.assunto}
             </p>
 
             <p>
-              <span>Status: </span>Em aberto
+              <span>Status: </span>
+              {chamado.status}
             </p>
           </div>
 
           <div className="desc">
-            <p>
-              <span>Descrição: </span>
-              Problemas de rede são bastante comuns e podem ser causados.
-            </p>
+            {chamado.descricao !== '' && (
+              <p>
+                <span>Descrição: </span>
+                {chamado.descricao}
+              </p>
+            )}
           </div>
         </Content>
       </Container>

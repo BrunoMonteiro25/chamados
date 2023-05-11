@@ -7,7 +7,7 @@ export const ModalDiv = styled.div`
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.081);
+  background-color: rgba(0, 0, 0, 0.04);
   display: flex;
   justify-content: center;
   position: fixed;

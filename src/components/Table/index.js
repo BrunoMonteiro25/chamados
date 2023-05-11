@@ -29,6 +29,8 @@ export default function StickyHeadTable() {
 
   const [isModalVisible, setIsModalVisible] = useState(false)
 
+  const [selectedChamado, setSelectedChamado] = useState(null)
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -42,8 +44,8 @@ export default function StickyHeadTable() {
     fetchData()
   }, [])
 
-  function openModal(event) {
-    event.preventDefault()
+  function openModal(chamado) {
+    setSelectedChamado(chamado)
     setIsModalVisible(true)
   }
 
@@ -71,12 +73,18 @@ export default function StickyHeadTable() {
       align: 'center',
       format: (value, row) => (
         <Acoes>
-          <button onClick={openModal} className="config-view">
+          <button onClick={() => openModal(row)} className="config-view">
             <Visualizar />
           </button>
 
           {isModalVisible ? (
-            <ModalChamados onClose={() => setIsModalVisible(false)} />
+            <ModalChamados
+              onClose={() => {
+                setSelectedChamado(null)
+                setIsModalVisible(false)
+              }}
+              chamado={selectedChamado}
+            />
           ) : null}
 
           <button onClick={() => handleEdit(row)} className="config-edit">
@@ -102,6 +110,7 @@ export default function StickyHeadTable() {
     status: chamado.status,
     data: new Date(chamado.dataCriacao).toLocaleDateString('pt-BR'),
     acoes: '',
+    descricao: chamado.descricao,
   }))
 
   function handleClick() {
