@@ -16,7 +16,7 @@ export const ModalDiv = styled.div`
 export const Container = styled.div`
   margin-top: 250px;
   background-color: #eee;
-  color: #111;
+  color: #17181f;
   width: 500px;
   height: max-content;
   border-radius: 6px;
@@ -79,10 +79,10 @@ export const Content = styled.div`
   }
 
   .cancelar {
-    background-color: #b8b8b8;
+    background-color: #d04735;
 
     :hover {
-      background-color: #bdbdbd;
+      background-color: #d34c3b;
     }
   }
 

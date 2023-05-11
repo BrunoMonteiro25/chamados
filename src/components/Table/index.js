@@ -20,10 +20,14 @@ import { Acoes, HeaderTable } from './styles'
 
 import { useNavigate } from 'react-router-dom'
 
+import ModalChamados from '../Modal/chamado'
+
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const [chamados, setChamados] = React.useState([])
+  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [chamados, setChamados] = useState([])
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const navigate = useNavigate()
 
@@ -37,6 +41,11 @@ export default function StickyHeadTable() {
     }
     fetchData()
   }, [])
+
+  function openModal(event) {
+    event.preventDefault()
+    setIsModalVisible(true)
+  }
 
   const columns = [
     { id: 'nome', label: 'Cliente', minWidth: 170, align: 'center' },
@@ -62,9 +71,14 @@ export default function StickyHeadTable() {
       align: 'center',
       format: (value, row) => (
         <Acoes>
-          <button onClick={() => handleView(row)} className="config-view">
+          <button onClick={openModal} className="config-view">
             <Visualizar />
           </button>
+
+          {isModalVisible ? (
+            <ModalChamados onClose={() => setIsModalVisible(false)} />
+          ) : null}
+
           <button onClick={() => handleEdit(row)} className="config-edit">
             <Editar />
           </button>
@@ -79,7 +93,7 @@ export default function StickyHeadTable() {
   function handleEdit(row) {
     navigate('/editar-chamado')
   }
-  function handleView(row) {}
+
   function handleDelete(row) {}
 
   const rows = chamados.map((chamado) => ({
