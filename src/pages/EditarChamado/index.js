@@ -22,6 +22,33 @@ const EditarChamado = () => {
 
   console.log(chamado)
 
+  const [descricao, setDescricao] = useState(chamado?.descricao || '')
+
+  useEffect(() => {
+    async function carregaClientes() {
+      const data = await listarClientes()
+      setClientes(data)
+    }
+    carregaClientes()
+
+    if (chamado) {
+      const status = chamado.status
+      switch (status) {
+        case 'Em aberto':
+          setSelectedValue('a')
+          break
+        case 'Em atendimento':
+          setSelectedValue('b')
+          break
+        case 'Fechado':
+          setSelectedValue('c')
+          break
+        default:
+          setSelectedValue('a')
+      }
+    }
+  }, [chamado])
+
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
   }
@@ -43,14 +70,9 @@ const EditarChamado = () => {
     }
   }
 
-  useEffect(() => {
-    async function carregaClientes() {
-      const data = await listarClientes()
-      setClientes(data)
-    }
-
-    carregaClientes()
-  }, [])
+  const handleDescricaoChange = (event) => {
+    setDescricao(event.target.value)
+  }
 
   return (
     <Container>
@@ -122,7 +144,11 @@ const EditarChamado = () => {
           </div>
 
           <Label>Descrição</Label>
-          <TextArea placeholder="Descreva seu problema... (opcional)" />
+          <TextArea
+            placeholder="Descreva seu problema... (opcional)"
+            value={descricao}
+            onChange={handleDescricaoChange}
+          />
 
           <button>
             <Editar />
