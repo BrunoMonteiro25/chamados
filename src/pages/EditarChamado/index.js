@@ -6,8 +6,8 @@ import { Container, Content, Form, TextArea } from './styles'
 import { ReactComponent as Editar } from '../../assets/icones/editar.svg'
 import Label from '../../components/Label'
 
-import DropdownAssunto from '../../components/Select/assunto'
 import DropdownChamadoClientes from '../../components/Select/chamadoCliente'
+import DropdownChamadoAssunto from '../../components/Select/chamadoAssunto'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
@@ -70,7 +70,7 @@ const EditarChamado = () => {
           />
 
           <Label>Assunto</Label>
-          <DropdownAssunto onAssuntoSelect={() => console.log('assunto')} />
+          <DropdownChamadoAssunto chamadoSelecionado={chamado} />
 
           <Label>Status</Label>
           <div className="container">
