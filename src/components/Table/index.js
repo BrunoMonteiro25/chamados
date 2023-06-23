@@ -86,6 +86,26 @@ export default function StickyHeadTable() {
     setIsModalVisibleDelete(false)
   }
 
+  function handleEdit(chamado) {
+    setSelectedChamado(chamado)
+    console.log(chamado)
+    navigate('/editar-chamado', { state: { chamado: chamado } })
+  }
+
+  const rows = chamados.map((chamado) => ({
+    id: chamado._id,
+    nome: chamado.cliente.nome,
+    assunto: chamado.assunto,
+    status: chamado.status,
+    data: new Date(chamado.dataCriacao).toLocaleDateString('pt-BR'),
+    acoes: '',
+    descricao: chamado.descricao,
+  }))
+
+  function novoChamado() {
+    navigate('/novo-chamado')
+  }
+
   const columns = [
     { id: 'nome', label: 'Cliente', minWidth: 170, align: 'center' },
     { id: 'assunto', label: 'Assunto', minWidth: 100, align: 'center' },
@@ -149,24 +169,6 @@ export default function StickyHeadTable() {
     },
   ]
 
-  function handleEdit(row) {
-    navigate('/editar-chamado')
-  }
-
-  const rows = chamados.map((chamado) => ({
-    id: chamado._id,
-    nome: chamado.cliente.nome,
-    assunto: chamado.assunto,
-    status: chamado.status,
-    data: new Date(chamado.dataCriacao).toLocaleDateString('pt-BR'),
-    acoes: '',
-    descricao: chamado.descricao,
-  }))
-
-  function handleClick() {
-    navigate('/novo-chamado')
-  }
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -190,7 +192,7 @@ export default function StickyHeadTable() {
             <Atendimentos />
             Atendimentos
           </p>
-          <button className="novo-chamado" onClick={handleClick}>
+          <button className="novo-chamado" onClick={novoChamado}>
             <Novo />
             Novo Chamado
           </button>

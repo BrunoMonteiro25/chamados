@@ -7,14 +7,20 @@ import { ReactComponent as Editar } from '../../assets/icones/editar.svg'
 import Label from '../../components/Label'
 
 import DropdownAssunto from '../../components/Select/assunto'
-import DropdownClientes from '../../components/Select/cliente'
+import DropdownChamadoClientes from '../../components/Select/chamadoCliente'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
+import { useLocation } from 'react-router-dom'
 
 const EditarChamado = () => {
   const [selectedValue, setSelectedValue] = useState('a')
   const [clientes, setClientes] = useState([])
+
+  const location = useLocation()
+  const chamado = location.state?.chamado
+
+  console.log(chamado)
 
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
@@ -58,13 +64,13 @@ const EditarChamado = () => {
 
         <Form>
           <Label>Cliente</Label>
-          <DropdownClientes
+          <DropdownChamadoClientes
             clientes={clientes}
-            onClienteSelect={() => console.log('editar')}
+            chamadoSelecionado={chamado}
           />
 
           <Label>Assunto</Label>
-          <DropdownAssunto />
+          <DropdownAssunto onAssuntoSelect={() => console.log('assunto')} />
 
           <Label>Status</Label>
           <div className="container">
