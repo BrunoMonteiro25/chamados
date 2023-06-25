@@ -50,7 +50,7 @@ function App() {
         {createRoute('/clientes', <Clientes />)}
         {createRoute('/config', <Config />)}
         {createRoute('/novo-chamado', <NovoChamado />)}
-        {createRoute('/editar-chamado', <EditarChamado />)}
+        {createRoute('/editar-chamado/:id', <EditarChamado />)}
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/nova-conta" element={<Cadastrar />} />
       </Routes>

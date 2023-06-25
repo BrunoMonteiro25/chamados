@@ -14,6 +14,8 @@ import Radio from '@mui/material/Radio'
 
 import { toast } from 'react-toastify'
 
+import { useNavigate } from 'react-router-dom'
+
 const NovoChamado = () => {
   const [selectedValue, setSelectedValue] = useState('Em aberto')
   const [clientes, setClientes] = useState([])
@@ -28,6 +30,8 @@ const NovoChamado = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [buttonText, setButtonText] = useState('Registrar')
   const [buttonOpacity, setButtonOpacity] = useState(1)
+
+  const navigate = useNavigate()
 
   async function listarClientes() {
     try {
@@ -121,7 +125,8 @@ const NovoChamado = () => {
         setButtonText('Registrar')
         setButtonOpacity(1)
         setResetAssunto(false)
-      }, 1000)
+        navigate('/')
+      }, 1200)
     }
   }
 

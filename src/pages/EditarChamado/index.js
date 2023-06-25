@@ -11,18 +11,26 @@ import DropdownChamadoAssunto from '../../components/Select/chamadoAssunto'
 
 import { common } from '@mui/material/colors'
 import Radio from '@mui/material/Radio'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import { toast } from 'react-toastify'
 
 const EditarChamado = () => {
-  const [selectedValue, setSelectedValue] = useState('a')
-  const [clientes, setClientes] = useState([])
-
   const location = useLocation()
   const chamado = location.state?.chamado
 
-  console.log(chamado)
-
+  const [selectedValue, setSelectedValue] = useState('Em aberto')
+  const [clientes, setClientes] = useState([])
   const [descricao, setDescricao] = useState(chamado?.descricao || '')
+
+  const [clienteSelecionado, setClienteSelecionado] = useState(null)
+  const [assuntoSelecionado, setAssuntoSelecionado] = useState(null)
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [buttonText, setButtonText] = useState('Atualizar')
+  const [buttonOpacity, setButtonOpacity] = useState(1)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function carregaClientes() {
@@ -35,16 +43,16 @@ const EditarChamado = () => {
       const status = chamado.status
       switch (status) {
         case 'Em aberto':
-          setSelectedValue('a')
+          setSelectedValue('Em aberto')
           break
         case 'Em atendimento':
-          setSelectedValue('b')
+          setSelectedValue('Em atendimento')
           break
         case 'Fechado':
-          setSelectedValue('c')
+          setSelectedValue('Fechado')
           break
         default:
-          setSelectedValue('a')
+          setSelectedValue('Em aberto')
       }
     }
   }, [chamado])
@@ -74,6 +82,42 @@ const EditarChamado = () => {
     setDescricao(event.target.value)
   }
 
+  const atualizarChamado = async (event) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    setButtonText('Atualizando...')
+    setButtonOpacity(0.5)
+
+    try {
+      await axios.put(`http://localhost:8000/chamados/${chamado.id}`, {
+        cliente: clienteSelecionado || chamado.id_cliente,
+        assunto: assuntoSelecionado || chamado.assunto,
+        status: selectedValue,
+        descricao: descricao,
+      })
+
+      toast.success(`O chamado foi atualizado !`, {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
+    } catch (error) {
+      console.error('Erro ao atualizar chamado:', error)
+    } finally {
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setButtonText('Atualizar')
+        setButtonOpacity(1)
+        navigate('/')
+      }, 1200)
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -89,16 +133,20 @@ const EditarChamado = () => {
           <DropdownChamadoClientes
             clientes={clientes}
             chamadoSelecionado={chamado}
+            onClienteSelecionado={setClienteSelecionado}
           />
 
           <Label>Assunto</Label>
-          <DropdownChamadoAssunto chamadoSelecionado={chamado} />
+          <DropdownChamadoAssunto
+            chamadoSelecionado={chamado}
+            onAssuntoSelecionado={setAssuntoSelecionado}
+          />
 
           <Label>Status</Label>
           <div className="container">
             <div className="radio">
               <Radio
-                {...controlProps('a')}
+                {...controlProps('Em aberto')}
                 id="option1"
                 color="default"
                 size="small"
@@ -113,7 +161,7 @@ const EditarChamado = () => {
             </div>
             <div className="radio">
               <Radio
-                {...controlProps('b')}
+                {...controlProps('Em atendimento')}
                 id="option2"
                 color="default"
                 size="small"
@@ -128,7 +176,7 @@ const EditarChamado = () => {
             </div>
             <div className="radio">
               <Radio
-                {...controlProps('c')}
+                {...controlProps('Fechado')}
                 id="option3"
                 color="default"
                 size="small"
@@ -150,9 +198,24 @@ const EditarChamado = () => {
             onChange={handleDescricaoChange}
           />
 
-          <button>
-            <Editar />
-            <p>Atualizar</p>
+          <button
+            onClick={atualizarChamado}
+            disabled={isSubmitting}
+            style={{ opacity: buttonOpacity }}
+          >
+            {buttonText === 'Atualizando...' ? (
+              <div className="loader">
+                <div className="loader-circle"></div>
+                <p>Atualizando...</p>
+              </div>
+            ) : (
+              <>
+                <div className="button-icon">
+                  <Editar style={{ width: '24px', height: '24px' }} />
+                </div>
+                <span>{buttonText}</span>
+              </>
+            )}
           </button>
         </Form>
       </Content>

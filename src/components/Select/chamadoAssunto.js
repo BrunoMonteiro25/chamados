@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { DropdownWrapper, Select, Caret, Menu, MenuItem } from './styles'
 
-const DropdownChamadoAssunto = ({ chamadoSelecionado }) => {
+const DropdownChamadoAssunto = ({
+  chamadoSelecionado,
+  onAssuntoSelecionado,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState(chamadoSelecionado.assunto)
 
@@ -14,6 +17,7 @@ const DropdownChamadoAssunto = ({ chamadoSelecionado }) => {
   const handleOptionClick = (option) => {
     setSelected(option)
     setIsOpen(false)
+    onAssuntoSelecionado(option)
   }
 
   useEffect(() => {

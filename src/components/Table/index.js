@@ -88,13 +88,13 @@ export default function StickyHeadTable() {
 
   function handleEdit(chamado) {
     setSelectedChamado(chamado)
-    console.log(chamado)
-    navigate('/editar-chamado', { state: { chamado: chamado } })
+    navigate(`/editar-chamado/${chamado.id}`, { state: { chamado: chamado } })
   }
 
   const rows = chamados.map((chamado) => ({
     id: chamado._id,
     nome: chamado.cliente.nome,
+    id_cliente: chamado.cliente._id,
     assunto: chamado.assunto,
     status: chamado.status,
     data: new Date(chamado.dataCriacao).toLocaleDateString('pt-BR'),
