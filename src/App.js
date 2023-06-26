@@ -51,6 +51,7 @@ function App() {
         {createRoute('/config', <Config />)}
         {createRoute('/novo-chamado', <NovoChamado />)}
         {createRoute('/editar-chamado/:id', <EditarChamado />)}
+        {createRoute('*', <Home />)}
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/nova-conta" element={<Cadastrar />} />
       </Routes>
