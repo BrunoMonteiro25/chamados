@@ -98,6 +98,11 @@ const Login = ({ handleLogin }) => {
     setEmail(value)
   }
 
+  function handleSenhaChange(event) {
+    setSenha(event.target.value)
+    setSenhaEmpty(false)
+  }
+
   return (
     <Container>
       <TopDiv>ENTRAR</TopDiv>
@@ -133,7 +138,7 @@ const Login = ({ handleLogin }) => {
             name="senha"
             placeholder="************"
             value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            onChange={handleSenhaChange}
           />
           {senhaEmpty && (
             <p style={{ color: '#f1341b' }}>Campo obrigatório *</p>

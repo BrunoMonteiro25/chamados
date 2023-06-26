@@ -284,6 +284,26 @@ const Clientes = () => {
     setIsModalVisible(true)
   }
 
+  function handleNomeChange(event) {
+    setNome(
+      event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1),
+    )
+    setNomeError('')
+  }
+
+  function handleCnpjChange(event) {
+    setCnpj(event.target.value)
+    setCnpjError('')
+  }
+
+  function handleCnpjChangeEdit(event) {
+    setClienteSelecionado({
+      ...clienteSelecionado,
+      cnpj: event.target.value,
+    })
+    setCnpjErrorEdit('')
+  }
+
   const renderForm = () => {
     switch (selectedValue) {
       case 'novo':
@@ -294,12 +314,7 @@ const Clientes = () => {
               type="text"
               placeholder="Nome da empresa"
               value={nome}
-              onChange={(e) =>
-                setNome(
-                  e.target.value.charAt(0).toUpperCase() +
-                    e.target.value.slice(1),
-                )
-              }
+              onChange={handleNomeChange}
             />
             {nomeError && <p style={{ color: '#f1341b' }}>{nomeError}</p>}
 
@@ -309,7 +324,7 @@ const Clientes = () => {
               mask="99.999.999/9999-99"
               value={cnpj}
               placeholder="00.000.000/0000-00"
-              onChange={(e) => setCnpj(e.target.value)}
+              onChange={handleCnpjChange}
             />
             {cnpjError && (
               <p
@@ -366,12 +381,7 @@ const Clientes = () => {
               mask="99.999.999/9999-99"
               value={clienteSelecionado ? clienteSelecionado.cnpj || '' : ''}
               placeholder="00.000.000/0000-00"
-              onChange={(e) =>
-                setClienteSelecionado({
-                  ...clienteSelecionado,
-                  cnpj: e.target.value,
-                })
-              }
+              onChange={handleCnpjChangeEdit}
             />
 
             {cnpjErrorEdit && (

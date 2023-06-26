@@ -58,7 +58,7 @@ const Cadastrar = () => {
         })
 
         toast.success('Cadastro Realizado !', {
-          position: 'bottom-right',
+          position: 'top-right',
           autoClose: 1500,
           hideProgressBar: false,
           closeOnClick: true,
@@ -103,6 +103,22 @@ const Cadastrar = () => {
     setEmail(value)
   }
 
+  function handleNomeChange(event) {
+    setNome(
+      event.target.value
+        .toLowerCase()
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' '),
+    )
+    setNomeEmpty(false)
+  }
+
+  function handleSenhaChange(event) {
+    setSenha(event.target.value)
+    setSenhaEmpty(false)
+  }
+
   return (
     <Container>
       <TopDiv>CADASTRAR-SE</TopDiv>
@@ -125,15 +141,7 @@ const Cadastrar = () => {
             type="text"
             placeholder="Digite seu nome"
             value={nome}
-            onChange={(e) =>
-              setNome(
-                e.target.value
-                  .toLowerCase()
-                  .split(' ')
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(' '),
-              )
-            }
+            onChange={handleNomeChange}
           />
           {nomeEmpty && <p style={{ color: '#f1341b' }}>Campo obrigatório *</p>}
 
@@ -154,7 +162,7 @@ const Cadastrar = () => {
             type="password"
             placeholder="************"
             value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            onChange={handleSenhaChange}
           />
           {senhaEmpty && (
             <p style={{ color: '#f1341b' }}>Campo obrigatório *</p>
