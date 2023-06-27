@@ -62,7 +62,7 @@ export default function StickyHeadTable() {
     try {
       await axios.delete(`http://localhost:8000/chamados/${id}`)
 
-      toast.success(`O chamado foi excluído !`, {
+      toast.success(`O chamado foi excluído!`, {
         position: 'top-right',
         autoClose: 1500,
         hideProgressBar: false,

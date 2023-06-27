@@ -96,7 +96,7 @@ const EditarChamado = () => {
         descricao: descricao,
       })
 
-      toast.success(`O chamado foi atualizado !`, {
+      toast.success(`O chamado foi atualizado!`, {
         position: 'top-right',
         autoClose: 1500,
         hideProgressBar: false,

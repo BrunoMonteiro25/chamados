@@ -43,6 +43,27 @@ const Clientes = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false)
 
+  const [chamados, setChamados] = useState([])
+
+  const [clienteVinculadoChamado, setClienteVinculadoChamado] = useState(false)
+
+  useEffect(() => {
+    async function listarChamados() {
+      const response = await axios.get('http://localhost:8000/chamados')
+      const data = response.data
+      const clientesChamados = data.map((chamado) => chamado.cliente._id)
+
+      setChamados({ data, clientesChamados })
+    }
+    listarChamados()
+  }, [])
+
+  const verificarVinculoChamados = () => {
+    if (!clienteSelecionadoDelete) return false
+
+    return chamados.clientesChamados.includes(clienteSelecionadoDelete._id)
+  }
+
   async function listarClientes() {
     try {
       const response = await axios.get('http://localhost:8000/clientes')
@@ -60,6 +81,10 @@ const Clientes = () => {
 
     carregaClientes()
   }, [])
+
+  useEffect(() => {
+    setClienteVinculadoChamado(false)
+  }, [clienteSelecionadoDelete])
 
   const handleChangeRadio = (event) => {
     setSelectedValue(event.target.value)
@@ -220,7 +245,7 @@ const Clientes = () => {
 
       setCnpjErrorEdit(null)
 
-      toast.success(`O ${clienteSelecionado.nome} foi atualizado !`, {
+      toast.success(`Cliente: ${clienteSelecionado.nome} foi atualizado!`, {
         position: 'top-right',
         autoClose: 1500,
         hideProgressBar: false,
@@ -249,25 +274,29 @@ const Clientes = () => {
   const excluirCliente = async (event) => {
     event.preventDefault()
 
+    const clienteVinculado = verificarVinculoChamados()
+    if (clienteVinculado) {
+      setClienteVinculadoChamado(true)
+      setIsModalVisible(false)
+      return
+    }
+
     try {
       // eslint-disable-next-line no-unused-vars
       await axios.delete(
         `http://localhost:8000/clientes/${clienteSelecionadoDelete._id}`,
       )
 
-      toast.success(
-        `O cliente: ${clienteSelecionadoDelete.nome} foi excluído !`,
-        {
-          position: 'top-right',
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'dark',
-        },
-      )
+      toast.success(`Cliente: ${clienteSelecionadoDelete.nome} foi excluído!`, {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      })
 
       setIsModalVisible(false)
 
@@ -439,6 +468,17 @@ const Clientes = () => {
               clientes={clientes}
               onClienteSelect={setClienteSelecionadoDelete}
             />
+            {clienteVinculadoChamado && (
+              <p
+                style={{
+                  color: '#f1341b',
+                  marginBottom: '30px',
+                }}
+              >
+                Esse cliente não pode ser excluído, pois está vinculado a um
+                chamado.
+              </p>
+            )}
 
             <button className="buttonDelete" onClick={openModal}>
               <ExcluirCliente style={{ width: '24px', height: '24px' }} />

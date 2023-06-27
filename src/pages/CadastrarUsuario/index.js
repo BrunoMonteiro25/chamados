@@ -51,13 +51,13 @@ const Cadastrar = () => {
 
     if (nome !== '' && email !== '' && senha !== '') {
       try {
-        const response = await axios.post('http://localhost:8000/usuarios', {
+        await axios.post('http://localhost:8000/usuarios', {
           nome,
           email,
           senha,
         })
 
-        toast.success('Cadastro Realizado !', {
+        toast.success('Cadastro Realizado!', {
           position: 'top-right',
           autoClose: 1500,
           hideProgressBar: false,
@@ -67,11 +67,11 @@ const Cadastrar = () => {
           progress: undefined,
           theme: 'dark',
         })
-        console.log(response.data)
+
         navigate('/login')
       } catch (err) {
         if (err.response.status === 400) {
-          setErrorMsg('Email já cadastrado !')
+          setErrorMsg('Email já cadastrado!')
         } else {
           console.log(err)
         }

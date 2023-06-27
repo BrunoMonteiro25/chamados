@@ -69,7 +69,7 @@ const Config = () => {
       setCount(count + 1)
       setEmailError('')
 
-      toast.success('Usuário atualizado !', {
+      toast.success('Usuário atualizado!', {
         position: 'top-right',
         autoClose: 1500,
         hideProgressBar: false,

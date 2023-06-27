@@ -59,7 +59,7 @@ const Login = ({ handleLogin }) => {
         localStorage.setItem('chave_secreta_do_token', response.data.token)
         handleLogin()
 
-        toast.success('Logado com Sucesso !', {
+        toast.success('Logado com Sucesso!', {
           position: 'top-right',
           autoClose: 1500,
           hideProgressBar: false,
@@ -72,7 +72,6 @@ const Login = ({ handleLogin }) => {
 
         navigate('/')
       } catch (err) {
-        console.log(err)
         setLoginError('Email ou senha incorretos. Tente novamente.')
       }
     }
