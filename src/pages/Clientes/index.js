@@ -404,14 +404,20 @@ const Clientes = () => {
               onClienteSelect={setClienteSelecionado}
             />
 
-            <Label style={{ marginTop: '-5px' }}>CNPJ</Label>
-            <InputMask
-              className="input-cnpj"
-              mask="99.999.999/9999-99"
-              value={clienteSelecionado ? clienteSelecionado.cnpj || '' : ''}
-              placeholder="00.000.000/0000-00"
-              onChange={handleCnpjChangeEdit}
-            />
+            {clientes.length !== 0 && (
+              <>
+                <Label style={{ marginTop: '-5px' }}>CNPJ</Label>
+                <InputMask
+                  className="input-cnpj"
+                  mask="99.999.999/9999-99"
+                  value={
+                    clienteSelecionado ? clienteSelecionado.cnpj || '' : ''
+                  }
+                  placeholder="00.000.000/0000-00"
+                  onChange={handleCnpjChangeEdit}
+                />
+              </>
+            )}
 
             {cnpjErrorEdit && (
               <p
@@ -423,41 +429,47 @@ const Clientes = () => {
               </p>
             )}
 
-            <Label style={{ marginTop: '20px' }}>Endereço</Label>
-            <Input
-              type="text"
-              value={
-                clienteSelecionado ? clienteSelecionado.endereco || '' : ''
-              }
-              onChange={(event) =>
-                setClienteSelecionado({
-                  ...clienteSelecionado,
-                  endereco: event.target.value,
-                })
-              }
-              placeholder="Endereço da empresa"
-            />
+            {clientes.length !== 0 && (
+              <>
+                <Label style={{ marginTop: '20px' }}>Endereço</Label>
+                <Input
+                  type="text"
+                  value={
+                    clienteSelecionado ? clienteSelecionado.endereco || '' : ''
+                  }
+                  onChange={(event) =>
+                    setClienteSelecionado({
+                      ...clienteSelecionado,
+                      endereco: event.target.value,
+                    })
+                  }
+                  placeholder="Endereço da empresa"
+                />
 
-            <button
-              className="buttonEdit"
-              onClick={atualizarCliente}
-              disabled={isSubmitting}
-              style={{ opacity: buttonOpacity }}
-            >
-              {buttonTextEdit === 'Atualizando...' ? (
-                <div className="loader">
-                  <div className="loader-circle"></div>
-                  <p>Atualizando...</p>
-                </div>
-              ) : (
-                <>
-                  <div className="button-icon">
-                    <EditarCliente style={{ width: '24px', height: '24px' }} />
-                  </div>
-                  <span>{buttonTextEdit}</span>
-                </>
-              )}
-            </button>
+                <button
+                  className="buttonEdit"
+                  onClick={atualizarCliente}
+                  disabled={isSubmitting}
+                  style={{ opacity: buttonOpacity }}
+                >
+                  {buttonTextEdit === 'Atualizando...' ? (
+                    <div className="loader">
+                      <div className="loader-circle"></div>
+                      <p>Atualizando...</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="button-icon">
+                        <EditarCliente
+                          style={{ width: '24px', height: '24px' }}
+                        />
+                      </div>
+                      <span>{buttonTextEdit}</span>
+                    </>
+                  )}
+                </button>
+              </>
+            )}
           </Form>
         )
       case 'excluir':
@@ -480,10 +492,12 @@ const Clientes = () => {
               </p>
             )}
 
-            <button className="buttonDelete" onClick={openModal}>
-              <ExcluirCliente style={{ width: '24px', height: '24px' }} />
-              <p>Excluir</p>
-            </button>
+            {clientes.length !== 0 && (
+              <button className="buttonDelete" onClick={openModal}>
+                <ExcluirCliente style={{ width: '24px', height: '24px' }} />
+                <p>Excluir</p>
+              </button>
+            )}
 
             {isModalVisible ? (
               <Modal

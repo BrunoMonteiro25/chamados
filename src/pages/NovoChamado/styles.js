@@ -34,9 +34,17 @@ export const Form = styled.form`
   flex-direction: column;
   width: 500px;
   font-family: 'Poppins', sans-serif;
+  position: relative;
 
   label {
     font-size: 18px !important;
+  }
+
+  .cliente {
+    position: absolute;
+    color: #f1341b;
+    left: 2px;
+    top: 105px;
   }
 
   .container {
@@ -114,6 +122,10 @@ export const Form = styled.form`
 
   @media screen and (max-width: 615px) {
     width: 250px;
+
+    .cliente {
+      top: 123px;
+    }
   }
 `
 

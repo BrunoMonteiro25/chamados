@@ -146,73 +146,80 @@ const NovoChamado = () => {
             clientes={clientes}
             onClienteSelect={setClienteSelecionado}
           />
+          {clientes.length === 0 && (
+            <p className="cliente">Cadastre um cliente antes de continuar</p>
+          )}
 
-          <Label>Assunto</Label>
-          <DropdownAssunto
-            onAssuntoSelect={setAssuntoSelecionado}
-            resetAssunto={resetAssunto}
-          />
-
-          <Label>Status</Label>
-          <div className="container">
-            <div className="radio">
-              <Radio
-                {...controlProps('Em aberto')}
-                id="option1"
-                color="default"
-                size="small"
-                sx={{
-                  color: common['white'],
-                  '&.Mui-checked': {
-                    color: common['white'],
-                  },
-                }}
+          {clientes.length !== 0 && (
+            <>
+              <Label>Assunto</Label>
+              <DropdownAssunto
+                onAssuntoSelect={setAssuntoSelecionado}
+                resetAssunto={resetAssunto}
               />
-              <label htmlFor="option1">Em aberto</label>
-            </div>
-            <div className="radio">
-              <Radio
-                {...controlProps('Em atendimento')}
-                id="option2"
-                color="default"
-                size="small"
-                sx={{
-                  color: common['white'],
-                  '&.Mui-checked': {
-                    color: common['white'],
-                  },
-                }}
-              />
-              <label htmlFor="option2">Em atendimento</label>
-            </div>
-          </div>
 
-          <Label>Descrição</Label>
-          <TextArea
-            placeholder="Descreva seu problema... (opcional)"
-            value={descricao}
-            onChange={handleDescricaoChange}
-          />
-
-          <button
-            onClick={registrarChamado}
-            disabled={isSubmitting}
-            style={{ opacity: buttonOpacity }}
-          >
-            {buttonText === 'Registrando...' ? (
-              <div className="loader">
-                <div className="loader-circle"></div>
-                <p>Registrando...</p>
-              </div>
-            ) : (
-              <>
-                <div className="button-icon">
-                  <Novo style={{ width: '24px', height: '24px' }} />
+              <Label>Status</Label>
+              <div className="container">
+                <div className="radio">
+                  <Radio
+                    {...controlProps('Em aberto')}
+                    id="option1"
+                    color="default"
+                    size="small"
+                    sx={{
+                      color: common['white'],
+                      '&.Mui-checked': {
+                        color: common['white'],
+                      },
+                    }}
+                  />
+                  <label htmlFor="option1">Em aberto</label>
                 </div>
-                <span>{buttonText}</span>
-              </>
-            )}
-          </button>
+                <div className="radio">
+                  <Radio
+                    {...controlProps('Em atendimento')}
+                    id="option2"
+                    color="default"
+                    size="small"
+                    sx={{
+                      color: common['white'],
+                      '&.Mui-checked': {
+                        color: common['white'],
+                      },
+                    }}
+                  />
+                  <label htmlFor="option2">Em atendimento</label>
+                </div>
+              </div>
+
+              <Label>Descrição</Label>
+              <TextArea
+                placeholder="Descreva seu problema... (opcional)"
+                value={descricao}
+                onChange={handleDescricaoChange}
+              />
+
+              <button
+                onClick={registrarChamado}
+                disabled={isSubmitting}
+                style={{ opacity: buttonOpacity }}
+              >
+                {buttonText === 'Registrando...' ? (
+                  <div className="loader">
+                    <div className="loader-circle"></div>
+                    <p>Registrando...</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="button-icon">
+                      <Novo style={{ width: '24px', height: '24px' }} />
+                    </div>
+                    <span>{buttonText}</span>
+                  </>
+                )}
+              </button>
+            </>
+          )}
         </Form>
       </Content>
     </Container>

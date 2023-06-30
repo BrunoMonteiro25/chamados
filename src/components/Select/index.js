@@ -4,7 +4,7 @@ import { DropdownWrapper, Select, Caret, Menu, MenuItem } from './styles'
 const Dropdown = ({ clientes, onClienteSelect }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState(
-    clientes[0] || 'Selecione um cliente',
+    clientes[0] || 'Nenhum cliente cadastrado',
   )
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Dropdown = ({ clientes, onClienteSelect }) => {
         onClick={handleSelectClick}
       >
         <span className="selected">
-          {selected.nome ? selected.nome : 'Selecione um cliente'}
+          {selected.nome ? selected.nome : 'Nenhum cliente cadastrado'}
         </span>
         <Caret className={isOpen ? 'caret-rotate' : ''} />
       </Select>

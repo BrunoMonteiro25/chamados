@@ -4,7 +4,7 @@ import { DropdownWrapper, Select, Caret, Menu, MenuItem } from './styles'
 const DropdownClientes = ({ clientes, onClienteSelect }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState(
-    clientes[0] || 'Selecione um cliente',
+    clientes[0] || 'Nenhum cliente cadastrado',
   )
   // eslint-disable-next-line no-unused-vars
   const [key, setKey] = useState(0)
@@ -24,7 +24,7 @@ const DropdownClientes = ({ clientes, onClienteSelect }) => {
   }, [onClienteSelect, selected])
 
   useEffect(() => {
-    setSelected(clientes[0] || 'Selecione um cliente')
+    setSelected(clientes[0] || 'Nenhum cliente cadastrado')
     setKey((key) => key + 1) // Atualiza a chave quando a lista de clientes mudar
   }, [clientes])
 
@@ -35,7 +35,7 @@ const DropdownClientes = ({ clientes, onClienteSelect }) => {
         onClick={handleSelectClick}
       >
         <span className="selected">
-          {selected.nome ? selected.nome : 'Selecione um cliente'}
+          {selected.nome ? selected.nome : 'Nenhum cliente cadastrado'}
         </span>
         <Caret className={isOpen ? 'caret-rotate' : ''} />
       </Select>
