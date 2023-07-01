@@ -5,6 +5,10 @@ export const Container = styled.div`
   margin: 50px auto 0 auto;
   display: flex;
   gap: 30px;
+
+  @media screen and (max-width: 615px) {
+    gap: 0px;
+  }
 `
 
 export const Content = styled.div`

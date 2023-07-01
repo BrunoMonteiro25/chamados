@@ -15,6 +15,7 @@ import Radio from '@mui/material/Radio'
 import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router-dom'
+import HeaderMobile from '../../components/HeaderMobile'
 
 const NovoChamado = () => {
   const [selectedValue, setSelectedValue] = useState('Em aberto')
@@ -30,6 +31,8 @@ const NovoChamado = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [buttonText, setButtonText] = useState('Registrar')
   const [buttonOpacity, setButtonOpacity] = useState(1)
+
+  const [menuIsVisible, setMenuIsVisible] = useState(false)
 
   const navigate = useNavigate()
 
@@ -132,8 +135,12 @@ const NovoChamado = () => {
 
   return (
     <Container>
-      <Header />
+      <HeaderMobile
+        menuIsVisible={menuIsVisible}
+        setMenuIsVisible={setMenuIsVisible}
+      />
 
+      <Header setMenuIsVisible={setMenuIsVisible} />
       <Content>
         <p className="title">
           <Novo />

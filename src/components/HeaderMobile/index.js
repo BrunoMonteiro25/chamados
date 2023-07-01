@@ -1,25 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { AvatarCard, Container, NavLink, Menu, MenuMobileIcon } from './styles'
+import { Container, Nav, NavLink, AvatarCard } from './styles'
+
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
 import { ReactComponent as Chamados } from '../../assets/icones/chamados.svg'
 import { ReactComponent as Clientes } from '../../assets/icones/clientes.svg'
 import { ReactComponent as Config } from '../../assets/icones/config.svg'
 import { ReactComponent as Sair } from '../../assets/icones/sair.svg'
 
-import { useNavigate } from 'react-router-dom'
-
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
-
-const Header = ({ setMenuIsVisible }) => {
+const HeaderMobile = ({ menuIsVisible, setMenuIsVisible }) => {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
-
-  const navigate = useNavigate()
-
-  function handleClick() {
-    navigate('/config')
-  }
 
   function handleLogout() {
     localStorage.removeItem('chave_secreta_do_token')
@@ -40,13 +32,50 @@ const Header = ({ setMenuIsVisible }) => {
     setEmail(data.email)
   }
 
-  loadUser()
+  useEffect(() => {
+    if (!menuIsVisible) {
+      setMenuIsVisible(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [menuIsVisible])
+
+  useEffect(() => {
+    loadUser()
+  }, [])
+
+  useEffect(() => {
+    let isMenuOpen = false
+
+    const handleResize = () => {
+      if (window.innerWidth > 615) {
+        if (isMenuOpen) {
+          setMenuIsVisible(false)
+          isMenuOpen = false
+        }
+      } else {
+        isMenuOpen = true
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
-      <Container>
+      <Container isVisible={menuIsVisible}>
+        <CloseRoundedIcon
+          fontSize="large"
+          style={{ cursor: 'pointer' }}
+          onClick={() => setMenuIsVisible(false)}
+        />
+
         <AvatarCard>
-          <div className="letra" onClick={handleClick}>
+          <div className="letra">
             <p>{nome[0]}</p>
           </div>
           <div className="user">
@@ -55,38 +84,31 @@ const Header = ({ setMenuIsVisible }) => {
           </div>
         </AvatarCard>
 
-        <MenuMobileIcon onClick={() => setMenuIsVisible(true)}>
-          <MenuRoundedIcon fontSize="large" />
-        </MenuMobileIcon>
-
-        <Menu>
+        <Nav>
           <NavLink to="/">
             <Chamados />
-            <p>Chamados</p>
+            Chamados
           </NavLink>
-
           <NavLink to="/clientes">
             <Clientes />
-            <p>Clientes</p>
+            Clientes
           </NavLink>
-
           <NavLink to="/config">
             <Config />
-            <p>Configurações</p>
+            Configurações
           </NavLink>
-
           <NavLink
             to="/login"
+            style={{ marginLeft: '3px' }}
             onClick={handleLogout}
-            style={{ marginLeft: '3px', marginTop: '200px' }}
           >
             <Sair />
-            <p>Sair</p>
+            Sair
           </NavLink>
-        </Menu>
+        </Nav>
       </Container>
     </>
   )
 }
 
-export default Header
+export default HeaderMobile

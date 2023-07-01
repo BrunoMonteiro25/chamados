@@ -14,6 +14,7 @@ import Radio from '@mui/material/Radio'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
+import HeaderMobile from '../../components/HeaderMobile'
 
 const EditarChamado = () => {
   const location = useLocation()
@@ -29,6 +30,8 @@ const EditarChamado = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [buttonText, setButtonText] = useState('Atualizar')
   const [buttonOpacity, setButtonOpacity] = useState(1)
+
+  const [menuIsVisible, setMenuIsVisible] = useState(false)
 
   const navigate = useNavigate()
 
@@ -120,7 +123,12 @@ const EditarChamado = () => {
 
   return (
     <Container>
-      <Header />
+      <HeaderMobile
+        menuIsVisible={menuIsVisible}
+        setMenuIsVisible={setMenuIsVisible}
+      />
+
+      <Header setMenuIsVisible={setMenuIsVisible} />
 
       <Content>
         <p className="title">

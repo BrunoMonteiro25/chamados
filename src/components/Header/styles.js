@@ -67,6 +67,10 @@ export const AvatarCard = styled.div`
       display: none;
     }
   }
+
+  @media screen and (max-width: 615px) {
+    display: none;
+  }
 `
 
 export const Menu = styled.nav`
@@ -86,6 +90,10 @@ export const Menu = styled.nav`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  @media screen and (max-width: 615px) {
+    display: none;
   }
 `
 
@@ -130,5 +138,28 @@ export const NavLink = styled(Link)`
     p {
       display: none;
     }
+  }
+`
+
+export const MenuMobileIcon = styled.div`
+  display: none !important;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+
+  @media screen and (max-width: 615px) {
+    display: flex !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-59%, 25%);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #8282826e;
+    border-radius: 4px;
+    background-color: #2b2b4b;
+    width: 55px;
+    height: 55px;
   }
 `

@@ -10,6 +10,7 @@ import Input from '../../components/Input'
 import Label from '../../components/Label'
 
 import { toast } from 'react-toastify'
+import HeaderMobile from '../../components/HeaderMobile'
 
 const Config = () => {
   const [nome, setNome] = useState('')
@@ -17,6 +18,8 @@ const Config = () => {
   const [id, setId] = useState(null)
   const [count, setCount] = useState(0)
   const [emailError, setEmailError] = useState('')
+
+  const [menuIsVisible, setMenuIsVisible] = useState(false)
 
   useEffect(() => {
     async function loadUser() {
@@ -90,7 +93,12 @@ const Config = () => {
 
   return (
     <Container>
-      <Header />
+      <HeaderMobile
+        menuIsVisible={menuIsVisible}
+        setMenuIsVisible={setMenuIsVisible}
+      />
+
+      <Header setMenuIsVisible={setMenuIsVisible} />
 
       <Content>
         <p className="title">

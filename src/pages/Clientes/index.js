@@ -20,6 +20,7 @@ import InputMask from 'react-input-mask'
 import { toast } from 'react-toastify'
 import DropdownClientes from '../../components/Select/cliente'
 import Modal from '../../components/Modal'
+import HeaderMobile from '../../components/HeaderMobile'
 
 const Clientes = () => {
   const [nome, setNome] = useState('')
@@ -46,6 +47,8 @@ const Clientes = () => {
   const [chamados, setChamados] = useState([])
 
   const [clienteVinculadoChamado, setClienteVinculadoChamado] = useState(false)
+
+  const [menuIsVisible, setMenuIsVisible] = useState(false)
 
   useEffect(() => {
     async function listarChamados() {
@@ -514,7 +517,12 @@ const Clientes = () => {
 
   return (
     <Container>
-      <Header />
+      <HeaderMobile
+        menuIsVisible={menuIsVisible}
+        setMenuIsVisible={setMenuIsVisible}
+      />
+
+      <Header setMenuIsVisible={setMenuIsVisible} />
 
       <Content>
         <p className="title">
