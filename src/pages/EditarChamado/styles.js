@@ -92,7 +92,7 @@ export const Form = styled.form`
 
     .container {
       flex-direction: column;
-      gap: 10px;
+      gap: 0px;
     }
 
     .radio {
@@ -157,7 +157,19 @@ export const TextArea = styled.textarea`
     width: 380px;
   }
 
-  @media screen and (max-width: 615px) {
-    width: 250px;
+  @media screen and (max-width: 505px) {
+    width: 310px;
+  }
+
+  @media screen and (max-width: 434px) {
+    width: 270px;
+  }
+
+  @media screen and (max-width: 394px) {
+    width: 240px;
+  }
+
+  @media screen and (max-width: 365px) {
+    width: 210px;
   }
 `

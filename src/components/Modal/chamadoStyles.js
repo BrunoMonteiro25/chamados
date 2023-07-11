@@ -30,6 +30,14 @@ export const Container = styled.div`
   @media (max-width: 615px) {
     width: 350px;
   }
+
+  @media (max-width: 415px) {
+    width: 280px;
+  }
+
+  @media (max-height: 525px) {
+    margin-top: 100px;
+  }
 `
 
 export const Content = styled.div`
@@ -47,10 +55,17 @@ export const Content = styled.div`
     width: 310px;
   }
 
+  @media (max-width: 415px) {
+    .titulo {
+      width: 240px;
+    }
+  }
+
   .titulo {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* border: 1px solid black; */
 
     p {
       font-weight: 500;

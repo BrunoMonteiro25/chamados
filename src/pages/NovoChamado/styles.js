@@ -55,6 +55,7 @@ export const Form = styled.form`
   .container {
     display: flex;
     gap: 20px;
+    width: max-content;
     margin-bottom: 30px;
   }
 
@@ -127,9 +128,21 @@ export const Form = styled.form`
 
   @media screen and (max-width: 615px) {
     width: 250px;
+    padding-bottom: 20px;
+  }
+
+  @media screen and (max-width: 434px) {
+    .container {
+      flex-direction: column;
+      gap: 0px;
+    }
+  }
+
+  @media screen and (max-width: 394px) {
+    width: 210px;
 
     .cliente {
-      top: 123px;
+      top: 130px;
     }
   }
 `
@@ -165,7 +178,19 @@ export const TextArea = styled.textarea`
     width: 380px;
   }
 
-  @media screen and (max-width: 615px) {
-    width: 250px;
+  @media screen and (max-width: 505px) {
+    width: 310px;
+  }
+
+  @media screen and (max-width: 434px) {
+    width: 270px;
+  }
+
+  @media screen and (max-width: 394px) {
+    width: 240px;
+  }
+
+  @media screen and (max-width: 365px) {
+    width: 210px;
   }
 `

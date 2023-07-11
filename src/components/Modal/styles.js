@@ -27,6 +27,10 @@ export const Container = styled.div`
     width: 350px;
   }
 
+  @media (max-height: 525px) {
+    margin-top: 130px;
+  }
+
   .fechar {
     display: flex;
     right: calc(-100% + 52px);
