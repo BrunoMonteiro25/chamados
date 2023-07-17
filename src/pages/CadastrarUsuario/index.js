@@ -51,7 +51,7 @@ const Cadastrar = () => {
 
     if (nome !== '' && email !== '' && senha !== '') {
       try {
-        await axios.post('http://localhost:8000/usuarios', {
+        await axios.post('https://api-sistema-chamados.onrender.com/usuarios', {
           nome,
           email,
           senha,

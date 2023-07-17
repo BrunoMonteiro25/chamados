@@ -40,7 +40,7 @@ export default function StickyHeadTable() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        'http://localhost:8000/chamados?_sort=dataCriacao&_order=desc',
+        'https://api-sistema-chamados.onrender.com/chamados?_sort=dataCriacao&_order=desc',
       )
       const data = response.data
       setChamados(data.reverse())
@@ -60,7 +60,9 @@ export default function StickyHeadTable() {
 
   async function deletarChamado(id) {
     try {
-      await axios.delete(`http://localhost:8000/chamados/${id}`)
+      await axios.delete(
+        `https://api-sistema-chamados.onrender.com/chamados/${id}`,
+      )
 
       toast.success(`O chamado foi excluído!`, {
         position: 'top-right',

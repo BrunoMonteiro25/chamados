@@ -22,7 +22,9 @@ function App() {
     const token = localStorage.getItem('chave_secreta_do_token')
     if (token) {
       axios
-        .post('http://localhost:8000/verificar-token', { token })
+        .post('https://api-sistema-chamados.onrender.com/verificar-token', {
+          token,
+        })
         .then((response) => {
           setIsAuthenticated(response.data.isAuthenticated)
         })

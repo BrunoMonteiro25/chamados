@@ -51,10 +51,13 @@ const Login = ({ handleLogin }) => {
 
     if (email !== '' && senha !== '') {
       try {
-        const response = await axios.post('http://localhost:8000/login', {
-          email,
-          senha,
-        })
+        const response = await axios.post(
+          'https://api-sistema-chamados.onrender.com/login',
+          {
+            email,
+            senha,
+          },
+        )
 
         localStorage.setItem('chave_secreta_do_token', response.data.token)
         handleLogin()

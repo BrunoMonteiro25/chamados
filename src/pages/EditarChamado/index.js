@@ -74,7 +74,9 @@ const EditarChamado = () => {
 
   async function listarClientes() {
     try {
-      const response = await axios.get('http://localhost:8000/clientes')
+      const response = await axios.get(
+        'https://api-sistema-chamados.onrender.com/clientes',
+      )
       return response.data
     } catch (error) {
       console.error(error)
@@ -92,12 +94,15 @@ const EditarChamado = () => {
     setButtonOpacity(0.5)
 
     try {
-      await axios.put(`http://localhost:8000/chamados/${chamado.id}`, {
-        cliente: clienteSelecionado || chamado.id_cliente,
-        assunto: assuntoSelecionado || chamado.assunto,
-        status: selectedValue,
-        descricao: descricao,
-      })
+      await axios.put(
+        `https://api-sistema-chamados.onrender.com/chamados/${chamado.id}`,
+        {
+          cliente: clienteSelecionado || chamado.id_cliente,
+          assunto: assuntoSelecionado || chamado.assunto,
+          status: selectedValue,
+          descricao: descricao,
+        },
+      )
 
       toast.success(`O chamado foi atualizado!`, {
         position: 'top-right',

@@ -38,7 +38,9 @@ const NovoChamado = () => {
 
   async function listarClientes() {
     try {
-      const response = await axios.get('http://localhost:8000/clientes')
+      const response = await axios.get(
+        'https://api-sistema-chamados.onrender.com/clientes',
+      )
       return response.data
     } catch (error) {
       console.error(error)
@@ -100,7 +102,10 @@ const NovoChamado = () => {
         descricao: descricao,
       }
 
-      await axios.post('http://localhost:8000/chamados', novoChamado)
+      await axios.post(
+        'https://api-sistema-chamados.onrender.com/chamados',
+        novoChamado,
+      )
 
       setResetAssunto(true)
       setSelectedValue('Em aberto')

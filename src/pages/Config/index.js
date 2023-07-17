@@ -25,11 +25,14 @@ const Config = () => {
     async function loadUser() {
       const token = localStorage.getItem('chave_secreta_do_token')
 
-      const response = await fetch('http://localhost:8000/usuario-logado', {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        'https://api-sistema-chamados.onrender.com/usuario-logado',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
 
       const data = await response.json()
 
@@ -57,7 +60,7 @@ const Config = () => {
     try {
       const token = localStorage.getItem('chave_secreta_do_token')
       const response = await axios.put(
-        `http://localhost:8000/usuarios/${id}`,
+        `https://api-sistema-chamados.onrender.com/usuarios/${id}`,
         { nome, email },
         {
           headers: {

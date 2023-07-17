@@ -52,7 +52,9 @@ const Clientes = () => {
 
   useEffect(() => {
     async function listarChamados() {
-      const response = await axios.get('http://localhost:8000/chamados')
+      const response = await axios.get(
+        'https://api-sistema-chamados.onrender.com/chamados',
+      )
       const data = response.data
       const clientesChamados = data.map((chamado) => chamado.cliente._id)
 
@@ -69,7 +71,9 @@ const Clientes = () => {
 
   async function listarClientes() {
     try {
-      const response = await axios.get('http://localhost:8000/clientes')
+      const response = await axios.get(
+        'https://api-sistema-chamados.onrender.com/clientes',
+      )
       return response.data
     } catch (error) {
       console.error(error)
@@ -170,7 +174,7 @@ const Clientes = () => {
     }
 
     try {
-      await axios.post('http://localhost:8000/clientes', {
+      await axios.post('https://api-sistema-chamados.onrender.com/clientes', {
         nome: nome,
         cnpj: cnpj,
         endereco: endereco,
@@ -234,7 +238,7 @@ const Clientes = () => {
     try {
       // eslint-disable-next-line no-unused-vars
       const response = await axios.put(
-        `http://localhost:8000/clientes/${clienteSelecionado._id}`,
+        `https://api-sistema-chamados.onrender.com/clientes/${clienteSelecionado._id}`,
         {
           cnpj: clienteSelecionado.cnpj,
           endereco: clienteSelecionado.endereco,
@@ -287,7 +291,7 @@ const Clientes = () => {
     try {
       // eslint-disable-next-line no-unused-vars
       await axios.delete(
-        `http://localhost:8000/clientes/${clienteSelecionadoDelete._id}`,
+        `https://api-sistema-chamados.onrender.com/clientes/${clienteSelecionadoDelete._id}`,
       )
 
       toast.success(`Cliente: ${clienteSelecionadoDelete.nome} foi excluído!`, {
