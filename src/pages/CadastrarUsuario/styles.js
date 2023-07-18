@@ -22,6 +22,8 @@ export const TopDiv = styled.div`
   letter-spacing: 5px;
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
+  box-shadow: 5px -5px 15px rgba(0, 0, 0, 0.5),
+    -5px -5px 15px rgba(0, 0, 0, 0.5);
 
   @media screen and (max-width: 632px) {
     width: 400px;
@@ -42,6 +44,7 @@ export const BottomDiv = styled.div`
   justify-content: center;
   border-radius: 0 0 23px 23px;
   padding-bottom: 30px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 
   @media screen and (max-width: 632px) {
     width: 400px;

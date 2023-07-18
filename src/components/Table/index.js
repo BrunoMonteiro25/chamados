@@ -187,6 +187,7 @@ export default function StickyHeadTable() {
           width: '100%',
           overflow: 'hidden',
           backgroundColor: '#2B2B4B',
+          boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)',
         }}
       >
         <HeaderTable>

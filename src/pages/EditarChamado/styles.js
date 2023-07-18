@@ -19,6 +19,7 @@ export const Content = styled.div`
   font-family: 'Poppins', sans-serif;
   border-radius: 6px;
   height: max-content;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
   .title {
     display: flex;

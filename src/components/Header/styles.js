@@ -11,6 +11,7 @@ export const AvatarCard = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
   .letra {
     width: 52px;
@@ -84,6 +85,7 @@ export const Menu = styled.nav`
   font-weight: 300;
   letter-spacing: 1px;
   padding: 10px 20px 20px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
   @media screen and (max-width: 875px) {
     width: 80px;
