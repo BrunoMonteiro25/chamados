@@ -18,6 +18,7 @@ const Config = () => {
   const [id, setId] = useState(null)
   const [count, setCount] = useState(0)
   const [emailError, setEmailError] = useState('')
+  const [nomeError, setNomeError] = useState('')
 
   const [menuIsVisible, setMenuIsVisible] = useState(false)
 
@@ -47,6 +48,14 @@ const Config = () => {
   async function handleSave(event) {
     event.preventDefault()
 
+    // Validar campo de nome
+    if (nome.trim() === '') {
+      setNomeError('Campo obrigatório *')
+      return
+    } else {
+      setNomeError('')
+    }
+
     // Validar campo de e-mail
     const emailRegex = /\S+@\S+\.\S+/
     if (!email) {
@@ -73,6 +82,7 @@ const Config = () => {
       setNome(response.data.nome)
       setEmail(response.data.email)
       setCount(count + 1)
+      setNomeError('')
       setEmailError('')
 
       toast.success('Usuário atualizado!', {
@@ -94,6 +104,17 @@ const Config = () => {
     }
   }
 
+  function handleNomeChange(e) {
+    setNome(
+      e.target.value
+        .toLowerCase()
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' '),
+    )
+    setNomeError('')
+  }
+
   return (
     <Container>
       <HeaderMobile
@@ -111,19 +132,17 @@ const Config = () => {
 
         <Form>
           <Label>Nome</Label>
-          <Input
-            type="text"
-            value={nome}
-            onChange={(e) =>
-              setNome(
-                e.target.value
-                  .toLowerCase()
-                  .split(' ')
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(' '),
-              )
-            }
-          />
+          <Input type="text" value={nome} onChange={handleNomeChange} />
+
+          {nomeError !== '' && (
+            <p
+              style={{
+                color: '#f1341b',
+              }}
+            >
+              {nomeError}
+            </p>
+          )}
 
           <Label style={{ marginTop: '20px' }}>Email</Label>
           <Input

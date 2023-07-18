@@ -113,8 +113,14 @@ const Clientes = () => {
     } else if (!cnpjRegex.test(cnpj)) {
       return false
     } else {
-      // Realizar validação dos dígitos verificadores
+      // Verificar se todos os dígitos são iguais a zero
       const cnpjNumbers = cnpj.replace(/\D/g, '')
+      const allZeros = /^0{14}$/.test(cnpjNumbers)
+      if (allZeros) {
+        return false
+      }
+
+      // Realizar validação dos dígitos verificadores
       const weights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
       const sum = cnpjNumbers
         .slice(0, 12)

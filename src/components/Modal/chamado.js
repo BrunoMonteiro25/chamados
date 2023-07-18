@@ -1,10 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ModalDiv, Container, Content } from './chamadoStyles'
 import { ReactComponent as Fechar } from '../../assets/icones/fechar2.svg'
 
 const ModalChamados = ({ id = 'modal', onClose = () => {}, chamado }) => {
   const handleOutsideClick = (e) => {
     if (e.target.id === id) onClose()
+  }
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const getLimitedDescription = () => {
+    let description = chamado.descricao
+
+    if (windowWidth > 715) {
+      if (description.length > 400) {
+        const lastSpaceIndex = description.lastIndexOf(' ', 400)
+        description = description.slice(0, lastSpaceIndex) + '...'
+      }
+    } else if (windowWidth > 415) {
+      if (description.length > 300) {
+        const lastSpaceIndex = description.lastIndexOf(' ', 300)
+        description = description.slice(0, lastSpaceIndex) + '...'
+      }
+    } else {
+      if (description.length > 100) {
+        const lastSpaceIndex = description.lastIndexOf(' ', 100)
+        description = description.slice(0, lastSpaceIndex) + '...'
+      }
+    }
+
+    return description
   }
 
   return (
@@ -44,7 +81,7 @@ const ModalChamados = ({ id = 'modal', onClose = () => {}, chamado }) => {
             {chamado.descricao !== '' && (
               <p>
                 <span>Descrição: </span>
-                {chamado.descricao}
+                {getLimitedDescription()}
               </p>
             )}
           </div>
