@@ -69,9 +69,9 @@ const Header = ({ setMenuIsVisible }) => {
   return (
     <>
       <Container>
-        <AvatarCard>
+        <AvatarCard onClick={handleClick}>
           {nome ? (
-            <div className="letra" onClick={handleClick}>
+            <div className="letra">
               <p>{nome[0]}</p>
             </div>
           ) : (
@@ -91,7 +91,9 @@ const Header = ({ setMenuIsVisible }) => {
 
           <div className="user">
             {nome ? (
-              <h2>{nome}</h2>
+              <h2>
+                {nome.length <= 20 ? nome : <>{nome.substring(0, 20)}...</>}
+              </h2>
             ) : (
               <Skeleton
                 baseColor="#5B5E80"
@@ -103,7 +105,9 @@ const Header = ({ setMenuIsVisible }) => {
             )}
 
             {email ? (
-              <p>{email}</p>
+              <p>
+                {email.length <= 60 ? email : <>{email.substring(0, 60)}...</>}
+              </p>
             ) : (
               <Skeleton
                 baseColor="#5B5E80"

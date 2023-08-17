@@ -12,6 +12,7 @@ export const AvatarCard = styled.div`
   align-items: center;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 
   .letra {
     width: 52px;
@@ -21,7 +22,6 @@ export const AvatarCard = styled.div`
     margin-left: 15px;
     border: 3px solid #fff;
     background-color: #17181f;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,6 +48,9 @@ export const AvatarCard = styled.div`
     color: #bbb;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+    max-width: 210px;
+    display: inline-block;
+    word-break: break-word;
   }
 
   svg {

@@ -27,6 +27,8 @@ const Config = () => {
 
   const [width, setWidth] = useState(window.innerWidth)
 
+  const [showSkeleton, setShowSkeleton] = useState(true)
+
   useEffect(() => {
     async function loadUser() {
       const token = localStorage.getItem('chave_secreta_do_token')
@@ -51,6 +53,7 @@ const Config = () => {
       setNome(data.nome)
       setEmail(data.email)
       setId(data._id)
+      setShowSkeleton(false)
     }
 
     loadUser()
@@ -151,9 +154,7 @@ const Config = () => {
 
         <Form>
           <Label>Nome</Label>
-          {nome ? (
-            <Input type="text" value={nome} onChange={handleNomeChange} />
-          ) : (
+          {showSkeleton ? (
             <Skeleton
               baseColor="#5B5E80"
               highlightColor="#6E7199"
@@ -164,6 +165,8 @@ const Config = () => {
                 width: width > 967 && '500px',
               }}
             />
+          ) : (
+            <Input type="text" value={nome} onChange={handleNomeChange} />
           )}
 
           {nomeError !== '' && (
@@ -177,19 +180,22 @@ const Config = () => {
           )}
 
           <Label style={{ marginTop: '20px' }}>Email</Label>
-          {email ? (
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          ) : (
+          {showSkeleton ? (
             <Skeleton
               baseColor="#5B5E80"
               highlightColor="#6E7199"
               count={1}
               height="50px"
-              style={{ borderRadius: '8px', width: width > 967 && '500px' }}
+              style={{
+                borderRadius: '8px',
+                width: width > 967 && '500px',
+              }}
+            />
+          ) : (
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           )}
 
