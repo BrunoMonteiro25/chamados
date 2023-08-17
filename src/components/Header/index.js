@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { AvatarCard, Container, NavLink, Menu, MenuMobileIcon } from './styles'
 
@@ -10,6 +10,9 @@ import { ReactComponent as Sair } from '../../assets/icones/sair.svg'
 import { useNavigate } from 'react-router-dom'
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
+
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Header = ({ setMenuIsVisible }) => {
   const [nome, setNome] = useState('')
@@ -39,22 +42,78 @@ const Header = ({ setMenuIsVisible }) => {
 
     const data = await response.json()
 
+    // setTimeout(() => {
+    //   setNome(data.nome)
+    //   setEmail(data.email)
+    // }, 190000 * 10000000)
+
     setNome(data.nome)
     setEmail(data.email)
   }
 
   loadUser()
 
+  const [width, setWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  // skeleton basecolor: 17181F
+  // skeleton highcolor: 1C1E26
+
   return (
     <>
       <Container>
         <AvatarCard>
-          <div className="letra" onClick={handleClick}>
-            <p>{nome[0]}</p>
-          </div>
+          {nome ? (
+            <div className="letra" onClick={handleClick}>
+              <p>{nome[0]}</p>
+            </div>
+          ) : (
+            <Skeleton
+              baseColor="#5B5E80"
+              highlightColor="#6E7199"
+              count={1}
+              circle="50%"
+              width="55px"
+              height="55px"
+              style={{
+                marginLeft: width >= 875 ? '15px' : '0',
+                marginRight: width < 875 ? '2px' : '0',
+              }}
+            />
+          )}
+
           <div className="user">
-            <h2>{nome}</h2>
-            <p>{email}</p>
+            {nome ? (
+              <h2>{nome}</h2>
+            ) : (
+              <Skeleton
+                baseColor="#5B5E80"
+                highlightColor="#6E7199"
+                count={1}
+                width="130px"
+                height="25px"
+              />
+            )}
+
+            {email ? (
+              <p>{email}</p>
+            ) : (
+              <Skeleton
+                baseColor="#5B5E80"
+                highlightColor="#6E7199"
+                count={1}
+                width="200px"
+                height="25px"
+                style={{ marginTop: '5px' }}
+              />
+            )}
           </div>
         </AvatarCard>
 

@@ -12,6 +12,9 @@ import Label from '../../components/Label'
 import { toast } from 'react-toastify'
 import HeaderMobile from '../../components/HeaderMobile'
 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 const Config = () => {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -21,6 +24,8 @@ const Config = () => {
   const [nomeError, setNomeError] = useState('')
 
   const [menuIsVisible, setMenuIsVisible] = useState(false)
+
+  const [width, setWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     async function loadUser() {
@@ -36,6 +41,12 @@ const Config = () => {
       )
 
       const data = await response.json()
+
+      // setTimeout(() => {
+      //   setNome(data.nome)
+      //   setEmail(data.email)
+      //   setId(data._id)
+      // }, 190000 * 10000000)
 
       setNome(data.nome)
       setEmail(data.email)
@@ -115,6 +126,14 @@ const Config = () => {
     setNomeError('')
   }
 
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <Container>
       <HeaderMobile
@@ -132,7 +151,20 @@ const Config = () => {
 
         <Form>
           <Label>Nome</Label>
-          <Input type="text" value={nome} onChange={handleNomeChange} />
+          {nome ? (
+            <Input type="text" value={nome} onChange={handleNomeChange} />
+          ) : (
+            <Skeleton
+              baseColor="#5B5E80"
+              highlightColor="#6E7199"
+              count={1}
+              height="50px"
+              style={{
+                borderRadius: '8px',
+                width: width > 967 && '500px',
+              }}
+            />
+          )}
 
           {nomeError !== '' && (
             <p
@@ -145,11 +177,21 @@ const Config = () => {
           )}
 
           <Label style={{ marginTop: '20px' }}>Email</Label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          {email ? (
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          ) : (
+            <Skeleton
+              baseColor="#5B5E80"
+              highlightColor="#6E7199"
+              count={1}
+              height="50px"
+              style={{ borderRadius: '8px', width: width > 967 && '500px' }}
+            />
+          )}
 
           {emailError !== undefined && (
             <p
