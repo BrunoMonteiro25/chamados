@@ -105,6 +105,10 @@ Home com chamados cadastrados
 Modal detalhes do chamado
 ![modal-detalhes-do-chamado](https://github.com/BrunoMonteiro25/utilidades/assets/98993736/dfd1ac15-90c2-4973-a6c0-a08a0f9c638c)
 
+Editar Chamado
+![tela-editar-chamado](https://github.com/BrunoMonteiro25/utilidades/assets/98993736/0a5129b5-1cfb-4795-8ebf-d032668a97a7)
 
+Excluir Chamado
+![tela-excluir-chamado](https://github.com/BrunoMonteiro25/utilidades/assets/98993736/a5b12656-8e05-46ef-9cb9-997352c7dd5a)
 
 
