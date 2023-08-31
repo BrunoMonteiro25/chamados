@@ -2,7 +2,7 @@
 
 ### Feito com: ReactJS, Styled Components e Material UI
 
-[Funcionalidades](#funcionalidades-checkered_flag) | [Dependências](#dependências-cloud) | [Telas](#telas-computer) 
+[Funcionalidades](#funcionalidades-checkered_flag) | [Dependências](#dependências-cloud) | [API](#api-mag) | [Telas](#telas-computer) 
 ##
 
 ### Descrição do Projeto :star:
@@ -71,6 +71,11 @@ http://localhost:3000/
 - react-router-dom
 - react-toastify
 - styled-components
+##
+
+### API :mag:
+
+Repositório da API utilizada como back-end do projeto: https://github.com/BrunoMonteiro25/api-chamados
 ##
 
 ### Telas :computer:
