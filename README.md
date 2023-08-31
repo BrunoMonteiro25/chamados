@@ -2,7 +2,7 @@
 
 ### Feito com: ReactJS, Styled Components e Material UI
 
-[Funcionalidades](#funcionalidades-checkered_flag) | [Tecnologias](#tecnologias-computer) 
+[Funcionalidades](#funcionalidades-checkered_flag) | [Dependências](#dependências-cloud) | [Telas](#telas-computer) 
 ##
 
 ### Descrição do Projeto :star:
@@ -42,5 +42,47 @@ npm start
 ```
 http://localhost:3000/
 ```
-
 ## 
+
+### Funcionalidades :checkered_flag:
+- Cadastrar Usuários
+- Login e Logout
+- Autenticação de Usuários
+- Cadastrar Clientes
+- Editar Clientes
+- Excluir Clientes
+- Editar dados do usuário logado
+- Cadastrar Novo Chamado
+- Visualizar detalhes do chamado
+- Editar Chamado
+- Excluir Chamado
+- Validações (email, cnpj)
+##
+
+### Dependências :cloud:
+- @emotion/react
+- @emotion/styled
+- @mui/icons-material
+- @mui/material
+- axios
+- jwt-decode
+- react-input-mask
+- react-loading-skeleton
+- react-router-dom
+- react-toastify
+- styled-components
+
+### Telas :computer:
+
+
+
+
+
+
+
+
+
+
+
+
+
