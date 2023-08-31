@@ -75,7 +75,10 @@ http://localhost:3000/
 
 ### API :mag:
 
-Repositório da API utilizada como back-end do projeto: https://github.com/BrunoMonteiro25/api-chamados
+- Repositório da API utilizada como back-end do projeto: 
+```
+https://github.com/BrunoMonteiro25/api-chamados
+```
 ##
 
 ### Telas :computer:
