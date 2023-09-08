@@ -14,6 +14,7 @@ import HeaderMobile from '../../components/HeaderMobile'
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Head from '../../components/Head'
 
 const Config = () => {
   const [nome, setNome] = useState('')
@@ -139,6 +140,7 @@ const Config = () => {
 
   return (
     <Container>
+      <Head title="Meu Perfil - " />
       <HeaderMobile
         menuIsVisible={menuIsVisible}
         setMenuIsVisible={setMenuIsVisible}

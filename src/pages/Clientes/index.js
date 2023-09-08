@@ -21,6 +21,7 @@ import { toast } from 'react-toastify'
 import DropdownClientes from '../../components/Select/cliente'
 import Modal from '../../components/Modal'
 import HeaderMobile from '../../components/HeaderMobile'
+import Head from '../../components/Head'
 
 const Clientes = () => {
   const [nome, setNome] = useState('')
@@ -527,6 +528,7 @@ const Clientes = () => {
 
   return (
     <Container>
+      <Head title="Clientes - " />
       <HeaderMobile
         menuIsVisible={menuIsVisible}
         setMenuIsVisible={setMenuIsVisible}

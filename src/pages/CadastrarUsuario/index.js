@@ -13,6 +13,7 @@ import Label from '../../components/Label'
 import axios from 'axios'
 
 import { toast } from 'react-toastify'
+import Head from '../../components/Head'
 
 const Cadastrar = () => {
   const navigate = useNavigate()
@@ -121,6 +122,7 @@ const Cadastrar = () => {
 
   return (
     <Container>
+      <Head title="Cadastre-se - " />
       <TopDiv>CADASTRAR-SE</TopDiv>
       <BottomDiv>
         <LoginForm onSubmit={handleSubmit}>

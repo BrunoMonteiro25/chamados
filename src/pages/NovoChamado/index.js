@@ -16,6 +16,7 @@ import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router-dom'
 import HeaderMobile from '../../components/HeaderMobile'
+import Head from '../../components/Head'
 
 const NovoChamado = () => {
   const [selectedValue, setSelectedValue] = useState('Em aberto')
@@ -140,6 +141,7 @@ const NovoChamado = () => {
 
   return (
     <Container>
+      <Head title="Novo Chamado - " />
       <HeaderMobile
         menuIsVisible={menuIsVisible}
         setMenuIsVisible={setMenuIsVisible}

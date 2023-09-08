@@ -16,6 +16,7 @@ import Label from '../../components/Label'
 import axios from 'axios'
 
 import { toast } from 'react-toastify'
+import Head from '../../components/Head'
 
 const Login = ({ handleLogin }) => {
   const navigate = useNavigate()
@@ -107,6 +108,7 @@ const Login = ({ handleLogin }) => {
 
   return (
     <Container>
+      <Head title="Entrar - " />
       <TopDiv>ENTRAR</TopDiv>
       <BottomDiv>
         <LoginForm onSubmit={handleSubmit}>

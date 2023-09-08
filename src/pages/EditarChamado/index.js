@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
 import HeaderMobile from '../../components/HeaderMobile'
+import Head from '../../components/Head'
 
 const EditarChamado = () => {
   const location = useLocation()
@@ -128,6 +129,7 @@ const EditarChamado = () => {
 
   return (
     <Container>
+      <Head title="Editar Chamado - " />
       <HeaderMobile
         menuIsVisible={menuIsVisible}
         setMenuIsVisible={setMenuIsVisible}
