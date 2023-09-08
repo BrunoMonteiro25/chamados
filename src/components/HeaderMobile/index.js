@@ -9,6 +9,9 @@ import { ReactComponent as Clientes } from '../../assets/icones/clientes.svg'
 import { ReactComponent as Config } from '../../assets/icones/config.svg'
 import { ReactComponent as Sair } from '../../assets/icones/sair.svg'
 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 const HeaderMobile = ({ menuIsVisible, setMenuIsVisible }) => {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -30,6 +33,11 @@ const HeaderMobile = ({ menuIsVisible, setMenuIsVisible }) => {
     )
 
     const data = await response.json()
+
+    // setTimeout(() => {
+    //   setNome(data.nome)
+    //   setEmail(data.email)
+    // }, 190000 * 10000000)
 
     setNome(data.nome)
     setEmail(data.email)
@@ -79,11 +87,46 @@ const HeaderMobile = ({ menuIsVisible, setMenuIsVisible }) => {
 
         <AvatarCard>
           <div className="letra">
-            <p>{nome[0]}</p>
+            {nome ? (
+              <p>{nome[0]}</p>
+            ) : (
+              <Skeleton
+                baseColor="#5B5E80"
+                highlightColor="#6E7199"
+                count={1}
+                circle="50%"
+                width="125px"
+                height="125px"
+              />
+            )}
           </div>
+
           <div className="user">
-            <h2>{nome}</h2>
-            <p>{email}</p>
+            {nome ? (
+              <h2>{nome}</h2>
+            ) : (
+              <Skeleton
+                baseColor="#5B5E80"
+                highlightColor="#6E7199"
+                count={1}
+                style={{ marginTop: '10px' }}
+                width="200px"
+                height="30px"
+              />
+            )}
+
+            {email ? (
+              <p>{email}</p>
+            ) : (
+              <Skeleton
+                baseColor="#5B5E80"
+                highlightColor="#6E7199"
+                count={1}
+                style={{ marginTop: '5px' }}
+                width="250px"
+                height="30px"
+              />
+            )}
           </div>
         </AvatarCard>
 
